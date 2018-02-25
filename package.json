@@ -1,0 +1,19 @@
+{
+  "name": "opollminer",
+  "version": "0.1.0",
+  "description": "Mining application for OpenPoll Polling Platform",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "op": "bin/opollminer.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.14.1",
+    "events": "^2.0.0"
+  }
+}
