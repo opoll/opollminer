@@ -5,7 +5,7 @@
   "main": "index.js",
   "preferGlobal": true,
   "bin": {
-    "op": "bin/opollminer.js"
+    "om": "bin/opollminer.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
