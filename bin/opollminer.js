@@ -203,7 +203,7 @@ program
     .command('start')
     .description("Starts the server, catches the node up with the network, and listens for connections")
     .action(function (){
-        console.log("Server Started! Listening for connections on port 8333.");
+        console.log("Starting server...");
         console.log("Synching node with network & broadcasting presence...");
     });
 
