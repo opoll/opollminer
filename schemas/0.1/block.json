@@ -1,0 +1,73 @@
+{
+  "id": "/block",
+  "type": "object",
+
+  "properties": {
+    "index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "a numeric number representing block index, 0 is the genesis block"
+    },
+
+    "author": {
+      "type": "string",
+      "description": "the address of the person who authored this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "difficulty": {
+      "type": "string",
+      "description": "the difficulty level used in computing this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "prevBlockHash": {
+      "type": "string",
+      "description": "the hash of the previous block on the chain",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "timestamp": {
+      "type": "number",
+      "description": "a UNIX timestamp of when this block was mined",
+      "minimum": 1514764800
+    },
+
+    "hash": {
+      "type": "string",
+      "description": "a hash representing this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "token_transactions": {
+      "type": "array",
+      "description": "an array of token transactions that occured in this block",
+      "items": {
+        "id": "/token/transaction",
+        "type": "object",
+        "additionalProperties": {"$ref": "#"}
+      }
+    },
+
+    "completed_shards": {
+      "type": "array",
+      "description": "an array of shards which were completed and incorporated into this block",
+      "items": {
+        "id": "/shard/completed",
+        "type": "object",
+        "additionalProperties": {"$ref": "#"}
+      }
+    }
+  },
+
+  "required": [
+    "index",
+    "author",
+    "difficulty",
+    "prevBlockHash",
+    "timestamp",
+    "hash",
+    "token_transactions",
+    "completed_shards"
+  ]
+}
