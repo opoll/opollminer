@@ -1,14 +1,13 @@
 # opollminer
-Official Mining Application for [OpenPoll](http://openpoll.io/) Platform
+Official Test Mining Application for [OpenPoll](http://openpoll.io/) Platform
 
-# How To Run
+#How to use the test miner client
 
-1.) Download the project and `cd` to the directory of the project. (The user must be in the same directory as the application before we create a [symlink](https://docs.npmjs.com/cli/link))
-
-2.) Run `npm install` to get all appropriate node modules necessary to run the application.
-
-3.) Run `npm link` to create a [symlink](https://kb.iu.edu/d/abbe) (and `npm unlink` to undo the symlink) so that commands can just be prefaced by "om" (stands for openpoll miner).
-
-4.) Finally, a user can call `om [command name] [args]` globally. Now the user can use the CLI more conveniently to interface with the application.
+After downloading the project, cd into /minerclient/ and run "node MinerClient.js"
 
 ## Commands Supported
+1.) Run the command "help" for an updated list of available commands
+2.) getshards ( grabs a list of available shards )
+3.) listshards ( echos a list of shards stored locally )
+4.) listblocks <shardID> ( echos a list of blocks for specified shard stored locally )
+5.) mine <shardID> ( ensures shard chain is up to date before mining )
