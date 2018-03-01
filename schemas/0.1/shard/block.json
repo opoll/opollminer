@@ -1,0 +1,71 @@
+{
+  "id": "/shard/block",
+  "type": "object",
+
+  "properties": {
+    "blockId": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "A numberic number representing this block; sequential. 0 represents genesis block."
+    },
+
+    "pollHash": {
+      "type": "string",
+      "description": "The hash of the poll that this block belongs to. Note a pollHash is used as an identifier for a poll.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "timestamp": {
+      "type": "integer",
+      "description": "A UNIX timestamp representing when this block was mined.",
+      "minimum": 1514764800
+    },
+
+    "prevHash": {
+      "type": "string",
+      "description": "Hash of the block which preceded this block.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "responses": {
+      "type": "array",
+      "description": "An array of poll response objects that are locked in the block.",
+      "items": {
+        "id": "/poll/response",
+        "type": "object"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+
+    "minerAddress": {
+      "type": "string",
+      "description": "The address of the person who mined this block.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "nonce": {
+      "type": "integer",
+      "description": "An arbitrary number used for mining.",
+      "minimum": 0
+    },
+
+    "hash": {
+      "type": "string",
+      "description": "Hash of this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+  },
+
+  "required": [
+    "blockId",
+    "pollHash",
+    "timestamp",
+    "prevHash",
+    "responses",
+    "minerAddress",
+    "nonce",
+    "hash"
+  ]
+}
