@@ -1,0 +1,82 @@
+{
+  "id": "/mainchain/block",
+  "type": "object",
+
+  "properties": {
+    "blockId": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "A numberic number representing this block; sequential. 0 represents genesis block."
+    },
+
+    "timestamp": {
+      "type": "integer",
+      "description": "A UNIX timestamp representing when this block was mined.",
+      "minimum": 1514764800
+    },
+
+    "prevHash": {
+      "type": "string",
+      "description": "Hash of the block which preceded this block.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "transactions": {
+      "type": "array",
+      "description": "an array of token transactions that occured in this block.",
+      "items": {
+        "type": "object",
+        "id": "/token/transaction",
+        "additionalProperties": {"$ref": "#"}
+      },
+      "uniqueItems": true
+    },
+
+    "shards": {
+      "type": "array",
+      "description": "an array SHA-256 hashes for completed shards included into this block.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9A-Fa-f]{64}$"
+      },
+      "uniqueItems": true
+    },
+
+    "minerAddress": {
+      "type": "string",
+      "description": "The address of the person who mined this block.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "difficulty": {
+      "type": "integer",
+      "description": "The difficulty level used for the computation of this block.",
+      "minimum": 0
+    },
+
+    "nonce": {
+      "type": "integer",
+      "description": "An arbitrary number used for mining.",
+      "minimum": 0
+    },
+
+    "hash": {
+      "type": "string",
+      "description": "Hash of this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    }
+
+  },
+
+  "required": [
+    "blockId",
+    "timestamp",
+    "prevHash",
+    "transactions",
+    "shards",
+    "minerAddress",
+    "difficulty",
+    "nonce",
+    "hash"
+  ]
+}

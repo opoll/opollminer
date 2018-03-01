@@ -1,0 +1,74 @@
+{
+  "id": "/poll/response",
+  "type": "object",
+
+  "properties": {
+    "responseHash": {
+      "type": "string",
+      "description": "A SHA256 hash used to identify this response.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "pollHash": {
+      "type": "string",
+      "description": "The poll which this response belongs to.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "timestamp": {
+      "type": "integer",
+      "description": "A timestamp representing when the respondent created this response.",
+      "minimum": 1514764800
+    },
+
+    "respondentAddr": {
+      "type": "string",
+      "description": "The address of the respondent.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "rewardAddr": {
+      "type": "string",
+      "description": "The address which rewards should be credited to, used for credit relaying.",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "signature": {
+      "type": "string",
+      "description": "The ECDSA signature of the respondent to signify that it is them who made this response (512B).",
+      "minLength": 1024,
+      "maxLength": 1024,
+      "pattern": "^[0-9A-Fa-f]{1024}$"
+    },
+
+    "responseData": {
+      "type": "array",
+      "description": "An array of responses made to this poll, further validation based off poll metadata.",
+      "items": {
+        "type": "string",
+        "maxLength": 2000
+      }
+    },
+
+    "respondentDemographics": {
+      "type": "array",
+      "description": "An array of demographics belonging to the respondent",
+      "items": {
+        "id": "/poll/demographic",
+        "type": "object"
+      },
+      "uniqueItems": true
+    }
+  },
+
+  "required": [
+    "responseHash",
+    "pollHash",
+    "timestamp",
+    "respondentAddr",
+    "rewardAddr",
+    "signature",
+    "responseData",
+    "respondentDemographics"
+  ]
+}
