@@ -4,9 +4,13 @@
 exports.shardList = [];
 
 /* save list via level db*/
-exports.saveShards = function(data){
+
+exports.saveShards = function (data) {
     var db = helpers.level("./db/shards");
-    db.put("shards", data);
+    for (var shardID in data) {
+        var shardData = data[shardID];
+        db.put(shardID, shardData);     // store each shardid as a key / val
+    }
     db.close();
 
     helpers.log("Saved updated shard list");
@@ -56,6 +60,8 @@ exports.getShards = function (callbackFunction) {
 
 exports.getShard = function (shardID) {
     if (!exports.shardList[shardID]) {
+       /* ERROR POINT INVALID SHARD */
+
         return false;
     }
     return exports.shardList[shardID];
@@ -65,6 +71,8 @@ exports.getShard = function (shardID) {
 /* request details about shard (peers/miners/blocks?)*/
 exports.queryShardData = function (shardID, ) {
     if (!exports.shardList[shardID]) {
+         /* ERROR POINT INVALID SHARD */
+
         return false;
     }
     exports.queryAPIServer(`shard/${shardID}/latest`, function (jdata) {
@@ -76,6 +84,9 @@ exports.queryShardData = function (shardID, ) {
 /* get the latest block on a shard chain */
 exports.getLatestBlock = function (shardID, block) {
     if (!exports.shardList[shardID]) {
+
+        /* ERROR POINT INVALID SHARD */
+
         return false;
     }
     if (!block) {
@@ -102,7 +113,7 @@ exports.getLatestBlock = function (shardID, block) {
             helpers.log("LATEST BLOCK IS " + block + "; READY TO MINE");
 
 
-            exports.saveShards(); // save the updated shard list to include this block chain
+            exports.saveShards(exports.shardList); // save the updated shard list to include this block chain
 
            
         }
