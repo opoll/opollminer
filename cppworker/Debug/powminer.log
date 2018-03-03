@@ -1,2 +1,12 @@
 ﻿  powminer.cpp
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(22): warning C4101: 'fNegative': unreferenced local variable
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(23): warning C4101: 'fOverflow': unreferenced local variable
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(62): warning C4477: 'printf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 1 has type 'const base_uint<256>'
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(121): warning C4477: 'printf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 2 has type 'uint64_t'
+  c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(121): note: consider using '%llu' in the format string
+  c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(121): note: consider using '%I64u' in the format string
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(141): warning C4477: 'printf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 2 has type 'uint64_t'
+  c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(141): note: consider using '%llu' in the format string
+  c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(141): note: consider using '%I64u' in the format string
+c:\users\administrator\source\repos\powminer\powminer\powminer.cpp(106): warning C4101: 'test2': unreferenced local variable
   powminer.vcxproj -> C:\Users\Administrator\source\repos\powminer\Debug\powminer.exe
