@@ -151,6 +151,7 @@
     <ClInclude Include="hash.h" />
     <ClInclude Include="prevector.h" />
     <ClInclude Include="serialize.h" />
+    <ClInclude Include="sha256.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tinyformat.h" />
