@@ -1,0 +1,65 @@
+{
+  "id": "/poll/poll",
+  "type": "object",
+
+  "properties": {
+    "pollHash": {
+      "type": "string",
+      "description": "the hash of this poll",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "timestamp": {
+      "type": "integer",
+      "description": "a UNIX timestamp representing when this poll was created",
+      "minimum": 1514764800
+    },
+
+    "expiry": {
+      "type": "integer",
+      "description": "a UNIX timestamp representing when this poll expires and is no longer valid",
+      "minimum": 1514764800
+    },
+
+    "totalFunding": {
+      "type": "integer",
+      "description": "the total funding for this poll",
+      "minimum": 0
+    },
+
+    "maxRespondents": {
+      "type": "integer",
+      "description": "the maximum number of respondents under this poll",
+      "minimum": 10,
+      "maximum": 50000
+    },
+
+    "questions": {
+      "type": "array",
+      "description": "a list of strings representing questions in this poll",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "string",
+        "minLength": 5,
+        "maxLength": 150
+      }
+    },
+
+    "imageId": {
+      "type": "integer",
+      "description": "a preselected image identifier to represent this poll",
+      "min": 1,
+      "max": 5
+    }
+  },
+
+  "required": [
+    "pollHash",
+    "timestamp",
+    "expiry",
+    "maxRespondents",
+    "questions",
+    "imageId"
+  ]
+}
