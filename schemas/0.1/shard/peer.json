@@ -1,0 +1,36 @@
+{
+  "id": "/shard/peer",
+  "type": "object",
+
+  "properties": {
+    "publicKey": {
+      "type": "string",
+      "description": "the public key associated with this peer",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+    "lastInteraction": {
+      "type": "integer",
+      "description": "a UNIX timestamp representing the last time this peer was interacted with",
+      "minimum": 1514764800
+    },
+
+    "ipAddress": {
+      "type": "string",
+      "description": "the IP address associated with this peer"
+    },
+
+    "port": {
+      "type": "integer",
+      "description": "the port this miner is operating on",
+      "minimum": 9000,
+      "maximum": 40000
+    }
+  },
+
+  "required": [
+    "publicKey",
+    "ipAddress",
+    "port"
+  ]
+}

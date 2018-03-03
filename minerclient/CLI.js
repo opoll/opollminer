@@ -1,29 +1,42 @@
-﻿/* basic command wrapper? */
 
+/*
+  This file creates a simple command line interface with basic hooking functionality
+*/
+
+// Import modules
 var helpers = require("./helpers");
 
-exports.CommandList = []; // store available commands for easy access
+// CLI Commands
+exports.CommandList = [];
 
-const ReadInput = helpers.readline.createInterface({
+// Input Listener
+const ReadInput = helpers.readline.createInterface( {
     input: process.stdin,
     output: process.stdout
-});
+} );
 
+// Wait for STDIN lines..
 ReadInput.on('line', (input) => {
-
-    // split args by space?
     var args = [];
     var i = 0;
+
+    // Split arguments by space
     input.split(" ").map(function (v) {
         args[i] = v;
         i++;
     });
-    if (exports.CommandList[args[0]]) {
+
+    // If the inputted command has a callback..
+    if( exports.CommandList[args[0]] )
         exports.CommandList[args[0]].func(args);
-    }
 });
 
-
+/*
+  This function is used to add a command to the CLI
+  -> cmd is the command the user enters
+  -> func is the callback for when the user enters the command
+  -> description is a description of the command
+*/
 exports.AddCommand = function(cmd, func, description) {
     exports.CommandList[cmd] = {
         func: func, description: description
@@ -31,10 +44,11 @@ exports.AddCommand = function(cmd, func, description) {
 }
 
 // grab NetworkModule
-module.exports = function (NetworkModule) {
+module.exports = function( NetworkModule ) {
+  // Local reference
+  exports.NetworkModule = NetworkModule;
 
-    exports.NetworkModule = NetworkModule; // so it can be accessed from each command
-
-    require("./commands/help")(exports); // send the exports so they are accessable from commands
-    require("./commands/getshards")(exports); 
+  // Load commands
+  require("./commands/help")(exports);
+  require("./commands/getshards")(exports);
 }

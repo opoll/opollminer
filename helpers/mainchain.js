@@ -2,13 +2,14 @@
 // Imports
 var crypto = require('crypto');
 var schemaValidator = require('jsonschema').validate;
+var helper_generic = require('./blockchain_generic');
 
 // Create the library
 var mainchainHelpers = {};
 
 // Path to a block schema
 mainchainHelpers.BLOCK_SCHEMA_PATH = "/mainchain/block";
-mainchainHelpers.BLOCK_SCHEMA = require( "../schemas/0.1" + mainchainHelpers.BLOCK_SCHEMA_PATH + ".json" );
+mainchainHelpers.BLOCK_SCHEMA = require( "../schemas/" + helper_generic.SCHEMA_VERSION + mainchainHelpers.BLOCK_SCHEMA_PATH + ".json" );
 
 /*
   Given a main chain block, this function will return true if the input

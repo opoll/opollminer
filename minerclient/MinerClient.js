@@ -1,13 +1,15 @@
+
+// Setup Environment
 require('dotenv').config();
+
+// Import Helpers
 var helpers = require("./helpers");
 
-console.log(process.env.MINERPORT);
-// listen server
+// Local Imports
 var NetworkModule = require("./NetworkModule");
-NetworkModule.StartListen(); // start listen server
 
+// Start the listens erver
+NetworkModule.StartListen();
 
-/* test console */
-require("./CLI")(NetworkModule); // pass the NetworkModule so it can be access from the command base
-
-//mnm.API.getShards();
+// Create a CLI
+require( "./CLI" )( NetworkModule );
