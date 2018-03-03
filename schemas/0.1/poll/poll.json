@@ -3,7 +3,7 @@
   "type": "object",
 
   "properties": {
-    "pollHash": {
+    "hash": {
       "type": "string",
       "description": "the hash of this poll",
       "pattern": "^[0-9A-Fa-f]{64}$"
@@ -55,7 +55,6 @@
   },
 
   "required": [
-    "pollHash",
     "timestamp",
     "expiry",
     "maxRespondents",

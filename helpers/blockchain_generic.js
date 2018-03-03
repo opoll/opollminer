@@ -17,5 +17,19 @@ lib.publicKeyToAddress = function( pubKey ) {
   return crypto.createHash('sha256').update(pubKey).digest('base64');
 }
 
+/*
+  Given an array of ordered field values this function will produce a SHA-256
+  hash
+*/
+lib.hashFromOrderedFields = function( arr, digestType = "hex" ) {
+  var hmac = crypto.createHmac( 'sha256', '' );
+
+  arr.forEach( function( v ) {
+    hmac = hmac.update( v );
+  } );
+
+  return hmac.digest( digestType );
+}
+
 // Export our helpers
 module.exports = lib;

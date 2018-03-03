@@ -60,3 +60,6 @@ lib.isGenesis = function( shardBlockObj ) {
 lib.responseCount = function( shardBlockObj ) {
   return shardBlockObj.responses.length;
 }
+
+// Export the library
+module.exports = lib;

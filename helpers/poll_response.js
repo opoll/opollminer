@@ -47,29 +47,34 @@ lib.bakedFields = function( pollResponseObj ) {
     * respondeData
     * respondentDemographics
 */
-lib.hash = function( pollResponseObj, digestType = "hex" ) {
-  // Create HMAC with basic block information
-  var hmac = crypto.createHmac( 'sha256', '' )
-            .update( pollResponseObj.pollHash )
-            .update( pollResponseObj.timestamp.toString() )
-            .update( pollResponseObj.respondentAddr )
-            .update( pollResponseObj.rewardAddr || "" );
+lib.orderedHashFields = function( o ) {
+  var arr = [
+    o.pollHash,
+    o.timestamp.toString(),
+    o.respondentAddr,
+    o.rewardAddr || ""
+  ];
 
-  // Update the HMAC with poll response data
-  pollResponseObj.responseData.forEach( function( responseStr ) {
-    hmac = hmac.update( responseStr );
+  // Include response data
+  o.responseData.forEach( function( responseStr ) {
+    arr.push( responseStr );
   } );
 
-  // Update the HMAC with deomgraphic information
-  pollResponseObj.respondentDemographics.forEach( function( demographicObj ) {
-    // TODO: Incorporate the demographic information into the hash
-  } );
+  // Include demographic information
+  // TODO
 
-  // Update the local hash
-  pollResponseObj.responseHash = hmac.digest( digestType );
+  return arr;
+}
 
-  // Grab a hex digest and return
-  return pollResponseObj.responseHash;
+/*
+  Returns a hash identifier of a poll
+*/
+lib.hash = function( o, digestType = "hex" ) {
+  // Update the hash on the poll object
+  o.responseHash = helper_generic.hashFromOrderedFields( lib.orderedHashFields( o ), digestType );
+
+  // Return the hash
+  return o.responseHash;
 }
 
 /*
