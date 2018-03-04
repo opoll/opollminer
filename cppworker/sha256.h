@@ -15,6 +15,7 @@ public:
 	void init();
 	void update(const unsigned char *message, unsigned int len);
 	void final(unsigned char *digest);
+	std::string finalstring();
 	static const unsigned int DIGEST_SIZE = (256 / 8);
 
 protected:
