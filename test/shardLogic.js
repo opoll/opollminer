@@ -61,6 +61,21 @@ describe( 'the shard logic controller', function() {
 
   } );
 
+  describe( 'poll manager module', function() {
+
+    it( 'should persist valid polls', function( done ) {
+      var poll = { hash: "hja98sdh98ashdasd" };
+
+      tLib.PollManager.persistValidPoll( poll, function() {
+        tLib.PollManager.knownPollHashes( function( hashes ) {
+          expect( hashes.includes( poll.hash ) ).to.be.true;
+          done();
+        } );
+      } );
+    } );
+
+  } );
+
   describe( 'shard local storage functionality', function() {
 
     it( "should return false when locally getting a shard that does not exist", function( done ) {
