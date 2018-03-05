@@ -17,7 +17,7 @@ var deleteFolderRecursive = function( path, rmRoot = true ) {
   }
 };
 
-beforeEach( function( done ) {
+afterEach( function( done ) {
   deleteFolderRecursive('./db/automated_testing', false);
   done();
 } );
