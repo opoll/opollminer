@@ -38,6 +38,29 @@ describe( 'the shard logic controller', function() {
 
   } );
 
+  describe( 'active shards module', function() {
+
+    it( 'should exist', function( done ) {
+      expect( tLib.ActiveShardsModule ).to.exist;
+      done();
+    } );
+
+    it( 'should allow a shard to be marked as active', function( done ) {
+      tLib.ActiveShardsModule.recordActiveShard( 'ABC', function() {
+        done();
+      } );
+    } );
+
+    it( 'should retreive an array of active shards', function() {
+      tLib.ActiveShardsModule.recordActiveShard( 'OOP', function() {
+        tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
+          expect( activeShards.includes( 'OOP' ) ).to.be.true;
+        } );
+      } );
+    } );
+
+  } );
+
   describe( 'shard local storage functionality', function() {
 
     it( "should return false when locally getting a shard that does not exist", function( done ) {
