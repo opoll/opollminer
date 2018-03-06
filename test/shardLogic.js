@@ -51,11 +51,65 @@ describe( 'the shard logic controller', function() {
       } );
     } );
 
-    it( 'should retreive an array of active shards', function() {
+    it( 'should retreive an array of active shards', function( done ) {
       tLib.ActiveShardsModule.recordActiveShard( 'OOP', function() {
         tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
           expect( activeShards.includes( 'OOP' ) ).to.be.true;
+          done();
         } );
+      } );
+    } );
+
+    it( 'should determine if a shard is active correctly', function( done ) {
+      var shardObj = { pollHash: "POLL-1234", localRespondents: [] };
+      var pollObj = { hash: "POLL-1234", name: "Do you support Donald Trump?", expiry: (new Date()/1000) + 50 };
+
+      // Save this poll
+      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
+        // Determine if the shard is active
+        tLib.ActiveShardsModule.isShardActive( shardObj )
+          .then( () => { done(); } )
+          .catch( (err) => { console.log( err ); expect(true).to.be.false; done(); } );
+      } );
+    } );
+
+    it( 'should determine a shard inactive if the poll expired', function( done ) {
+      var shardObj = { pollHash: "POLL-12345", localRespondents: [] };
+      var pollObj = { hash: "POLL-12345", name: "Do you support Donald Trump?", expiry: (new Date()/1000) - 50 };
+
+      // Save this poll
+      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
+        tLib.ActiveShardsModule.isShardActive( shardObj )
+          .then( (shard) => {
+            expect( true ).to.be.false;
+          } )
+          .catch( (err) => {
+            expect( err ).to.equal( "poll is expired" );
+            done();
+          } );
+      } );
+    } );
+
+    it( 'should determine a shard inactive if the max respondents was reached', function( done ) {
+      // Basic factories in need of reafactoring (hah!)
+      var shardObj = { pollHash: "POLL-12345", localRespondents: [1,2] };
+      var pollObj = {
+        hash: "POLL-12345",
+        maxRespondents: 1,
+        name: "Do you support Donald Trump?",
+        expiry: (new Date()/1000) + 50
+      };
+
+      // Save this poll
+      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
+        tLib.ActiveShardsModule.isShardActive( shardObj )
+          .then( (shard) => {
+            expect( true ).to.be.false;
+          } )
+          .catch( (err) => {
+            expect( err ).to.equal( "poll hit the maximum number of respondents" );
+            done();
+          } );
       } );
     } );
 
@@ -66,12 +120,32 @@ describe( 'the shard logic controller', function() {
     it( 'should persist valid polls', function( done ) {
       var poll = { hash: "hja98sdh98ashdasd" };
 
-      tLib.PollManager.persistValidPoll( poll, function() {
-        tLib.PollManager.knownPollHashes( function( hashes ) {
-          expect( hashes.includes( poll.hash ) ).to.be.true;
-          done();
-        } );
+      // Persist the poll
+      tLib.PollManager.persistValidPoll( poll ).then( () => {
+        // Get all known hashes
+        return tLib.PollManager.knownPollHashes();
+      } ).then( hashes => {
+        // Make sure it includes the poll we persisted earlier
+        expect( hashes.includes( poll.hash ) ).to.be.true;
+        done();
       } );
+
+    } );
+
+    it( 'should properly fetch polls', function( done ) {
+
+      var poll = { hash: "0aadsf0jsadfsdaf", k: 5 };
+
+      // Save a poll
+      tLib.PollManager.persistValidPoll( poll ).then( () => {
+        // Get all known hashes
+        return tLib.PollManager.fetchPoll( poll.hash );
+      } ).then( pollObj => {
+        // Make sure it returned the poll we provided earlier
+        expect( pollObj.k ).to.equal( 5 );
+        done();
+      } );
+
     } );
 
   } );
