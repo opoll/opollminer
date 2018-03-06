@@ -1,7 +1,12 @@
 ﻿var helpers = require("./helpers");
 
 /* quick access shard list */
-exports.shardList = [];
+var gen = require("./genblock");
+exports.shardList = {
+    ["0x01"]: {
+        blocks: gen,
+    }
+}
 
 /* save list via level db*/
 
@@ -79,7 +84,9 @@ exports.queryShardData = function (shardID, ) {
         console.log(jdata);
     });
 }
+exports.startMining = function (shardID) {
 
+}
 
 /* get the latest block on a shard chain */
 exports.getLatestBlock = function (shardID, block) {
@@ -111,11 +118,7 @@ exports.getLatestBlock = function (shardID, block) {
             exports.shardList[shardID].blocks[block].previousBlock = jdata.previousBlock;
 
             helpers.log("LATEST BLOCK IS " + block + "; READY TO MINE");
-
-
             exports.saveShards(exports.shardList); // save the updated shard list to include this block chain
-
-           
         }
     });
 }

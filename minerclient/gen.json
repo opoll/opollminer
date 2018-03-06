@@ -1,0 +1,54 @@
+{
+  "properties": {
+    "blockId":0,
+
+    "pollHash":"0x01",
+
+    "timestamp":0,
+
+    "nextHash": "",
+
+    "prevHash": "",
+
+    "responses": {
+      "type": "array",
+      "description": "an array of poll response objects that are locked in the block",
+      "items": {
+        "id": "/poll/response",
+        "type": "object"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+
+    "minerAddress": {
+      "type": "string",
+      "description": "the address of the person who mined this block",
+      "pattern": "^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$"
+    },
+
+    "nonce": {
+      "type": "integer",
+      "description": "an arbitrary number used for mining",
+      "minimum": 0
+    },
+
+    "hash": {
+      "type": "string",
+      "description": "hash of this block",
+      "pattern": "^[0-9A-Fa-f]{64}$"
+    },
+
+  },
+
+  "required": [
+    "blockId",
+    "pollHash",
+    "timestamp",
+    "prevHash",
+    "responses",
+    "minerAddress",
+    "nonce",
+    "hash"
+  ]
+}
