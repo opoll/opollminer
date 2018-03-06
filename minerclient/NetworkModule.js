@@ -1,28 +1,28 @@
-
-// Imports
-var helpers = require("./helpers");
+﻿var helpers = require("./helpers");
 exports.API = require("./NetworkModuleAPI");
 
-/*
-  This function starts the NetworkModule listen server which centralizes
-  incoming networking for the mining application. This module uses an ExpressJS
-  server
-*/
 exports.StartListen = function () {
-    // Create the express server
+    helpers.log("SERVER INIT");
+
+    // copy pasta express startup code from ico-api
     var express = require('express'),
         app = express(),
         port = process.env.MINERPORT || 9011,
         cors = require('cors');
+        
 
+
+    // bad?
     app.use(cors());
 
     // Parse input as json..
     app.use(helpers.bodyParser.urlencoded({ extended: true }));
     app.use(helpers.bodyParser.json());
 
-    // Create a listen server
+
+    // setup listen server
     var listenserver = require('./listenserver');
+
     listenserver(app);
 
     // Start Listening

@@ -8,7 +8,12 @@ var ShardLogicController = require('../lib/shard/logic');
 var lib = {};
 
 /* quick access shard list */
-lib.shardList = [];
+var gen = require("./genblock");
+lib.shardList = {
+    ["0x01"]: {
+        blocks: gen,
+    }
+}
 
 /* save list via level db*/
 
@@ -73,6 +78,9 @@ lib.queryShardData = function (shardID, ) {
         console.log(jdata);
     });
 }
+exports.startMining = function (shardID) {
+
+}
 
 /*
   This updates a provided shard chain with current information by fetching
@@ -119,31 +127,8 @@ lib.getLatestBlock = function( shardID, block = undefined ) {
         }
       }
 
-      // Update the
-
-      if (jdata.nextBlock) {
-          if (jdata.previousBlock) {
-              lib.shardList[shardID].blocks[block].previousBlock = jdata.previousBlock;
-          }
-          lib.shardList[shardID].blocks[block].nextBlock = jdata.nextBlock;
-
-          helpers.log("BLOCK LINKED " + block + " -> " + jdata.nextBlock)
-          lib.getLatestBlock(shardID, jdata.nextBlock); // this is not the latest block grab next
-      } else {
-
-          lib.shardList[shardID].blocks[block].previousBlock = jdata.previousBlock;
-
-          helpers.log("LATEST BLOCK IS " + block + "; READY TO MINE");
-
-
-          lib.saveShards(lib.shardList); // save the updated shard list to include this block chain
-
-
-      }
-
     } );
-
-}
+};
 
 // Expot the library
 module.exports = lib;
