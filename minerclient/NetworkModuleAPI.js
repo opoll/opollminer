@@ -1,11 +1,23 @@
-﻿var helpers = require("./helpers");
+
+// Import Helpers
+var helpers = require("./helpers");
+var shardBlockHelpers = require('../helpers/shard_block');
+var ShardLogicController = require('../lib/shard/logic');
+
+// Shard Network Module
+var lib = {};
 
 /* quick access shard list */
-exports.shardList = [];
+var gen = require("./genblock");
+lib.shardList = {
+    ["0x01"]: {
+        blocks: gen,
+    }
+}
 
 /* save list via level db*/
 
-exports.saveShards = function (data) {
+lib.saveShards = function (data) {
     var db = helpers.level("./db/shards");
     for (var shardID in data) {
         var shardData = data[shardID];
@@ -17,7 +29,7 @@ exports.saveShards = function (data) {
 }
 
 
-exports.queryAPIServer = function (command, callbackFunction) {
+lib.queryAPIServer = function (command, callbackFunction) {
     helpers.http.get({
         host: process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST,
         path: "/"+command,
@@ -43,10 +55,10 @@ exports.queryAPIServer = function (command, callbackFunction) {
 }
 
 /* grab list of shards from OpenPoll API server */
-exports.getShards = function (callbackFunction) {
-    exports.queryAPIServer("getshards", function (jdata) {
-        exports.saveShards(jdata); // save the new list
-        exports.shardList = jdata; // quick access
+lib.getShards = function (callbackFunction) {
+    lib.queryAPIServer("getshards", function (jdata) {
+        lib.saveShards(jdata); // save the new list
+        lib.shardList = jdata; // quick access
 
         /* pass the new list back to callback function if provided */
         if (callbackFunction) {
@@ -55,68 +67,68 @@ exports.getShards = function (callbackFunction) {
     });
 }
 
-
-/* get shardID specific json data internal */
-
-exports.getShard = function (shardID) {
-    if (!exports.shardList[shardID]) {
-       /* ERROR POINT INVALID SHARD */
-
-        return false;
-    }
-    return exports.shardList[shardID];
-}
-
-
 /* request details about shard (peers/miners/blocks?)*/
-exports.queryShardData = function (shardID, ) {
-    if (!exports.shardList[shardID]) {
+lib.queryShardData = function (shardID, ) {
+    if (!lib.shardList[shardID]) {
          /* ERROR POINT INVALID SHARD */
 
         return false;
     }
-    exports.queryAPIServer(`shard/${shardID}/latest`, function (jdata) {
+    lib.queryAPIServer(`shard/${shardID}/latest`, function (jdata) {
         console.log(jdata);
     });
 }
+exports.startMining = function (shardID) {
 
-
-/* get the latest block on a shard chain */
-exports.getLatestBlock = function (shardID, block) {
-    if (!exports.shardList[shardID]) {
-
-        /* ERROR POINT INVALID SHARD */
-
-        return false;
-    }
-    if (!block) {
-        block = "0x0000"; // start at genesis block (will be converted to numeric ordering instead of hash)
-    }
-    exports.queryAPIServer(`shard/${shardID}/nextblock/${block}`, function (jdata) {
-
-        if (!exports.shardList[shardID].blocks[block]) {
-            exports.shardList[shardID].blocks[block] = {};
-        }
-
-        if (jdata.nextBlock) {
-            if (jdata.previousBlock) {
-                exports.shardList[shardID].blocks[block].previousBlock = jdata.previousBlock;
-            }
-            exports.shardList[shardID].blocks[block].nextBlock = jdata.nextBlock;
-
-            helpers.log("BLOCK LINKED " + block + " -> " + jdata.nextBlock)
-            exports.getLatestBlock(shardID, jdata.nextBlock); // this is not the latest block grab next
-        } else {
-
-            exports.shardList[shardID].blocks[block].previousBlock = jdata.previousBlock;
-
-            helpers.log("LATEST BLOCK IS " + block + "; READY TO MINE");
-
-
-            exports.saveShards(exports.shardList); // save the updated shard list to include this block chain
-
-           
-        }
-    });
 }
 
+/*
+  This updates a provided shard chain with current information by fetching
+  blocks it does not have
+*/
+lib.getLatestBlock = function( shardID, block = undefined ) {
+  // If the local client is not mining that shard
+  // TODO: Don't read directly from memory, use shard data library call
+  if ( !lib.shardList[ shardID ] ) {
+      return false;
+  }
+
+  // If the block provided does not exist..
+  if ( block === undefined ) {
+    // Start with the genesis block
+    block = "0".repeat( 64 );
+  }
+
+  // Query the API server
+  // TODO: Convert this API call to P2P communication
+  lib.queryAPIServer(`shard/${shardID}/nextblock/${block}`, function ( shardBlockObj ) {
+
+      // If we haven't yet stored that block
+      // TODO: Don't read directly from memory, use shard data library call
+      if ( !lib.shardList[shardID].blocks[block] ) {
+          lib.shardList[shardID].blocks[block] = {};
+      }
+
+      // Validate the schema of this block
+      var objValidation = shardBlockHelpers.validateSchema( shardBlockObj );
+
+      if( objValidation.errors ) {
+        throw {
+          name: "InvalidShardBlockRetrieved",
+          message: "when retrieving the latest block associated with a shard, a block was retrieved that did not conform to schema"
+        };
+      }
+
+      // Confirm the block received actually precedes the block we inputted
+      if( shardBlockObj.prevHash !== block ) {
+        throw {
+          name: "IncorrectBlockRetrieved",
+          message: "when retrieving successive block, a non successive block was returned"
+        }
+      }
+
+    } );
+};
+
+// Expot the library
+module.exports = lib;

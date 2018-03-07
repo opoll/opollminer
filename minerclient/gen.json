@@ -1,37 +1,14 @@
 {
-  "id": "/shard/block",
-  "type": "object",
-
   "properties": {
-    "blockId": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "a numberic number representing this block; sequential. 0 represents genesis block"
-    },
+    "blockId":0,
 
-    "pollHash": {
-      "type": "string",
-      "description": "the hash of the poll that this block belongs to. Note a pollHash is used as an identifier for a poll",
-      "pattern": "^[0-9A-Fa-f]{64}$"
-    },
+    "pollHash":"0x01",
 
-    "timestamp": {
-      "type": "integer",
-      "description": "a UNIX timestamp representing when this block was mined",
-      "minimum": 1514764800
-    },
+    "timestamp":0,
 
-    "nextHash": {
-      "type": "string",
-      "description": "hash of the block which proceedes this block",
-      "pattern": "^[0-9A-Fa-f]{64}$"
-    },
+    "nextHash": "",
 
-    "prevHash": {
-      "type": "string",
-      "description": "hash of the block which preceded this block",
-      "pattern": "^[0-9A-Fa-f]{64}$"
-    },
+    "prevHash": "",
 
     "responses": {
       "type": "array",
