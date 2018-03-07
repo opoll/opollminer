@@ -9,22 +9,52 @@ var NetworkModule = require("./NetworkModule");
 NetworkModule.StartListen(); // start listen server
 
 
-/* test console */
+
 require("./CLI")(NetworkModule); // pass the NetworkModule so it can be access from the command base
 
 
 //console.log(sha256.digest("hex"));
-/*
 
-NetworkModule.miner = helpers.child_process.spawn("C:/Users/Administrator/source/repos/powminer/Debug/powminer.exe");
-*/
 
 var POWControl = require("./POWControljs");
 process.env.POWControl = POWControl; // global access to the pow miner so we dont have duplcate executables
 POWControl.CreateMiner();
 
 
+/*
+var test = 0x00ffff;
+var maxd = helpers.bigInt("0000000FFFF00000000000000000000000000000000000000000000000000000",256);
+var maxdd = helpers.bigInt("0000000FFFF00000000000000000000000000000000000000000000000000001", 256);
+var targetd = 0x00000000000404CB000000000000000000000000000000000000000000000000;
 
+
+if (maxdd.greater(maxd)) {
+    console.log("bigger");
+}
+
+test = test * 2 ** (8 * (0x1d - 3));
+console.log(maxd / targetd, test, maxd);
+
+var dif = 0x00000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+
+var shardBlockHelpers = require('../helpers/shard_block');
+var gen = require("./genblock");
+gen.minerAddress = "0x99999999999";
+
+var som = shardBlockHelpers.hashWithNonce(gen, "1358037190");
+console.log(som);
+som = parseInt(som, 16);
+
+console.log("INT TEST", som, som * 2);
+
+if (som <= dif ) {
+    console.log("smaller GOOD", dif, som);
+} else {
+    console.log("bigger BAD");
+}
+
+
+*/
 
 
 
