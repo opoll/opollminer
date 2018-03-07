@@ -15,6 +15,48 @@ describe( 'the shard logic controller', function() {
     done();
   } );
 
+  describe( 'shard response pool module', function() {
+
+    it( 'should thow an error when attempting to pool an invalid poll', function( done ) {
+      tLib.PoolManager.poolResponse( {} )
+        .then( function() { expect( true ).to.be.false; done(); } )
+        .catch( function( err ) {
+          expect( err ).to.equal( "invalid poll response object" );
+          done();
+        } );
+    } );
+
+    it( 'should pool a poll response and fetch it', function( done ) {
+      var simpleResponse = {
+        pollHash: "156ABD7",
+        responseHash: "615ACDF"
+      };
+
+      // Pool the response
+      tLib.PoolManager.poolResponse( simpleResponse ).then( function() {
+        // Fetch the pool
+        tLib.PoolManager.getResponsePool( simpleResponse.pollHash ).then( rPool => {
+          var found = false;
+          
+          // Make sure the response is in there..
+          rPool.forEach( function( pooledResp ) {
+            if( pooledResp.responseHash === simpleResponse.responseHash ) {
+              found = true;
+              return;
+            }
+          } );
+
+          // It wasn't found..
+          if( !found )
+            expect( true ).to.be.false;
+
+          done();
+        } );
+      } );
+    } );
+
+  } );
+
   describe( 'worked shards module', function() {
 
     it( 'should exist', function( done ) {
@@ -69,7 +111,7 @@ describe( 'the shard logic controller', function() {
         // Determine if the shard is active
         tLib.ActiveShardsModule.isShardActive( shardObj )
           .then( () => { done(); } )
-          .catch( (err) => { console.log( err ); expect(true).to.be.false; done(); } );
+          .catch( (err) => { expect(true).to.be.false; done(); } );
       } );
     } );
 
