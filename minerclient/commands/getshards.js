@@ -14,7 +14,7 @@ module.exports = function (CLI) {
     }, "<shardID> list blocks");
 
     CLI.AddCommand("mine", function (args) {
-        CLI.NetworkModule.API.getLatestBlock(args[1]);
+        CLI.NetworkModule.API.startMining(args[1]);//getLatestBlock(args[1]);
 
 
 
