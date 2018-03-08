@@ -8,12 +8,30 @@ var ShardLogicController = require('../lib/shard/logic');
 var lib = {};
 
 /* quick access shard list */
-var gen = require("./genblock");
-gen.minerAddress = "0x99999999999";
+
+var blankMeta = require("./genblock");
+lib.generateBlankBlock = function () {
+    var newblock = Object.assign({}, blankMeta);
+    return newblock;
+
+}
+var gen = lib.generateBlankBlock();
+//gen.pollHash = "0x01";
+//gen.minerAddress = "0x99999999999";
+
+var gen2 = lib.generateBlankBlock();
+//gen2.pollHash = "0x02";
+//gen2.minerAddress = "0x99999999998";
 lib.shardList = {
     ["0x01"]: {
         blocks: { 0: gen },
         pollHash: "0x01",
+        localChainLength: 0,
+        // genesisBlockHash:
+    },
+    ["0x02"]: {
+    blocks: { 0: gen2 },
+    pollHash: "0x02",
         localChainLength: 0,
         // genesisBlockHash:
     }
@@ -87,21 +105,37 @@ lib.queryShardData = function (shardID, ) {
     });
 }
 
+lib.generateLatestBlock = function (shardID) {
+    var dat = lib.shardList[shardID];
+    var previousBlock = dat.blocks[dat.localChainLength];
+    var newBlock = lib.generateBlankBlock();
+    newBlock.prevHash = shardBlockHelpers.hashWithNonce(previousBlock, "0");
+    newBlock.pollHash = shardID;
+
+    /* SET MINER ADDRESS */
+    newBlock.minerAddress = "bullshit address";
+    console.log("SHARD BLOCK:", newBlock);
+    return newBlock;
+}
 
 lib.startMining = function (shardID) {
     if (!lib.shardList[shardID]) {
         return false;
     }
     var dat = lib.shardList[shardID];
-    var block = dat.blocks[dat.localChainLength];
-    global.POWController.currentBlock = block;
-    global.POWController.MinerCommand("max");
-    global.POWController.MinerCommand(global.POWController.maxHashString);
-    global.POWController.MinerCommand("mine");
+  //  var previousBlock = dat.blocks[dat.localChainLength];
+    var block = lib.generateLatestBlock(shardID);
+   
+    var powC = global.POWController;
+   // powC.currentBlock = block;
+
+    powC.MinerCommand("mine");  //tell cpp miner we are mining a shard
+    powC.MinerCommand(shardID); //tell cpp miner the unique shardid
+    powC.MinerCommand(powC.maxHashString); //tell cpp miner the dificulty of this shard block
     for (var v of shardBlockHelpers.orderedHashFields(block)) {
-        global.POWController.MinerCommand(v);
+        powC.MinerCommand(v);
     }
-    global.POWController.MinerCommand("done");
+    powC.MinerCommand("done");
 }
 
 /*
