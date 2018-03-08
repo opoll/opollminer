@@ -83,36 +83,36 @@ describe( 'the shard logic controller', function() {
     } );
 
     it( 'should allow a shard to be marked as active', async function( done ) {
-      await tLib.ActiveShardsModule.recordActiveShard( 'ABC' );
+      await tLib.ActiveShardsModule.recordActiveShard( { pollHash: 'ABC' } );
       done();
     } );
 
     it( 'should retreive an array of active shards', async function( done ) {
       // Record an active shard
-      await tLib.ActiveShardsModule.recordActiveShard( 'OOP' );
+      await tLib.ActiveShardsModule.recordActiveShard( { pollHash: 'OOP' } );
 
       // Fetch active shards
       var activeShards = await tLib.ActiveShardsModule.getActiveShards();
 
       // Verify the shard was marked active
-      expect( activeShards.includes( 'OOP' ) ).to.be.true;
+      expect( activeShards[ 'OOP' ] !== undefined ).to.be.true;
       done();
     } );
 
     it( 'should not record duplicates', async function( done ) {
       // Get all active shards
       var activeShards = await tLib.ActiveShardsModule.getActiveShards();
-      var l = activeShards.length;
+      var l = Object.keys( activeShards ).length;
 
       // Attempt to add a duplicate active shard
-      await tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS' );
-      await tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS' );
+      await tLib.ActiveShardsModule.recordActiveShard( { pollHash: 'KSJIAHAIHAIA' } );
+      await tLib.ActiveShardsModule.recordActiveShard( { pollHash: 'KSJIAHAIHAIA' } );
 
       // Fetch active shards again
       var activeShards2 = await tLib.ActiveShardsModule.getActiveShards();
 
       // Verify duplicates were not added
-      expect( activeShards2.length ).to.equal( l + 1 );
+      expect( Object.keys( activeShards2 ).length ).to.equal( l + 1 );
       done();
     } );
 

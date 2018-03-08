@@ -31,10 +31,16 @@ exports.AddCommand = function(cmd, func, description) {
 }
 
 // grab NetworkModule
-module.exports = function (NetworkModule) {
+module.exports = {};
+module.exports.initialize = function( ShardLogicController ) {
+    // Initialization Message
+    console.log(
+      helpers.chalk.greenBright(
+        "Command line initialized. Type help to view a list of commands."
+      )
+    );
 
-    exports.NetworkModule = NetworkModule; // so it can be accessed from each command
-
-    require("./commands/help")(exports); // send the exports so they are accessable from commands
-    require("./commands/getshards")(exports); 
+    // Load Commands
+    require("./commands/help")( exports, ShardLogicController );
+    require("./commands/getshards")( exports, ShardLogicController );
 }
