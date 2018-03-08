@@ -17,6 +17,7 @@
     "url": "https://github.com/opoll/opollminer.git"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "big-integer": "^1.6.26",
     "body-parser": "^1.18.2",
     "bs58check": "^2.1.1",
