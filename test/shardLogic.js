@@ -59,23 +59,18 @@ describe( 'the shard logic controller', function() {
 
   describe( 'worked shards module', function() {
 
-    it( 'should exist', function( done ) {
+    it( 'should exist', function() {
       expect( tLib.WorkedShardsModule ).to.exist;
-      done();
     } );
 
-    it( 'should allow the storage of shards being mined', function( done ) {
-      tLib.WorkedShardsModule.persistMineShard( 'ABC', function() {
-        done();
-      } );
+    it( 'should allow the storage of shards being mined', async function() {
+      await tLib.WorkedShardsModule.persistMineShard( 'ABC8191' );
     } );
 
-    it( 'should retreive persisted Shards', function() {
-      tLib.WorkedShardsModule.persistMineShard( 'OOP', function() {
-        tLib.WorkedShardsModule.getWorkedShards( function( workedShards ) {
-          expect( workedShards.includes( 'OOP' ) ).to.be.true;
-        } );
-      } );
+    it( 'should retreive persisted shards', async function() {
+      await tLib.WorkedShardsModule.persistMineShard( 'OOP' );
+      var workedShards = await tLib.WorkedShardsModule.getWorkedShards();
+      expect( workedShards.includes( 'OOP' ) ).to.be.true;
     } );
 
   } );
