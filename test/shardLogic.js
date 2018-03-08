@@ -82,35 +82,38 @@ describe( 'the shard logic controller', function() {
       done();
     } );
 
-    it( 'should allow a shard to be marked as active', function( done ) {
-      tLib.ActiveShardsModule.recordActiveShard( 'ABC', function() {
-        done();
-      } );
+    it( 'should allow a shard to be marked as active', async function( done ) {
+      await tLib.ActiveShardsModule.recordActiveShard( 'ABC' );
+      done();
     } );
 
-    it( 'should retreive an array of active shards', function( done ) {
-      tLib.ActiveShardsModule.recordActiveShard( 'OOP', function() {
-        tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
-          expect( activeShards.includes( 'OOP' ) ).to.be.true;
-          done();
-        } );
-      } );
+    it( 'should retreive an array of active shards', async function( done ) {
+      // Record an active shard
+      await tLib.ActiveShardsModule.recordActiveShard( 'OOP' );
 
+      // Fetch active shards
+      var activeShards = await tLib.ActiveShardsModule.getActiveShards();
+
+      // Verify the shard was marked active
+      expect( activeShards.includes( 'OOP' ) ).to.be.true;
+      done();
     } );
 
-    it( 'should not record duplicates', function( done ) {
-      tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
-        var l = activeShards.length;
+    it( 'should not record duplicates', async function( done ) {
+      // Get all active shards
+      var activeShards = await tLib.ActiveShardsModule.getActiveShards();
+      var l = activeShards.length;
 
-        tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS', function() {
-        tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS', function() {
-          tLib.ActiveShardsModule.getActiveShards( function( activeShards2 ) {
-            expect( activeShards2.length ).to.equal( l + 1 );
-            done();
-          } );
-        } );
-        } );
-      } );
+      // Attempt to add a duplicate active shard
+      await tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS' );
+      await tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS' );
+
+      // Fetch active shards again
+      var activeShards2 = await tLib.ActiveShardsModule.getActiveShards();
+
+      // Verify duplicates were not added
+      expect( activeShards2.length ).to.equal( l + 1 );
+      done();
     } );
 
     it( 'should determine if a shard is active correctly', async function( done ) {
@@ -121,7 +124,7 @@ describe( 'the shard logic controller', function() {
       var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
 
       // Determine if the shard is active
-      tLib.ActiveShardsModule.isShardActive( shardObj )
+      tLib.ActiveShardsModule.assertShardActive( shardObj )
         .then( () => { done(); } )
         .catch( (err) => { expect(true).to.be.false; done(); } );
     } );
@@ -133,15 +136,12 @@ describe( 'the shard logic controller', function() {
       // Save this poll
       var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
 
-      tLib.ActiveShardsModule.isShardActive( shardObj )
-        .then( (shard) => {
-          expect( true ).to.be.false;
-        } )
-        .catch( (err) => {
+      try {
+        var shard = await tLib.ActiveShardsModule.assertShardActive( shardObj );
+      } catch( err ) {
           expect( err ).to.equal( "poll is expired" );
           done();
-        } );
-
+      };
     } );
 
     it( 'should determine a shard inactive if the max respondents was reached', async function( done ) {
@@ -157,14 +157,13 @@ describe( 'the shard logic controller', function() {
       // Save this poll
       var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
 
-      tLib.ActiveShardsModule.isShardActive( shardObj )
-        .then( (shard) => {
-          expect( true ).to.be.false;
-        } )
-        .catch( (err) => {
+      // Check the shard is not active
+      try {
+        await tLib.ActiveShardsModule.assertShardActive( shardObj );
+      } catch( err ) {
           expect( err ).to.equal( "poll hit the maximum number of respondents" );
           done();
-        } );
+      }
     } );
 
   } );
