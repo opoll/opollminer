@@ -8,7 +8,6 @@ var ShardLogicController = require('../lib/shard/logic');
 var lib = {};
 
 /* quick access shard list */
-
 var blankMeta = require("./genblock");
 lib.generateBlankBlock = function () {
     var newblock = Object.assign({}, blankMeta);
@@ -37,12 +36,7 @@ lib.shardList = {
     }
 }
 
-
-//console.log(shardBlockHelpers.hashWithNonce(gen, "1301477867"));
-
-
 /* save list via level db*/
-
 lib.saveShards = function (data) {
     var db = helpers.level("./db/shards");
     for (var shardID in data) {
@@ -54,7 +48,16 @@ lib.saveShards = function (data) {
     helpers.log("Saved updated shard list");
 }
 
+// The API URL
+lib.API_URL = (process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST);
 
+// Temp Shard List
+lib.shardList = {};
+
+/*
+  This function makes a call to the API server given a command and
+  a callback.
+*/
 lib.queryAPIServer = function (command, callbackFunction) {
     helpers.http.get({
         host: process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST,
