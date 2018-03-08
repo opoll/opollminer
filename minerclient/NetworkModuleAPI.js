@@ -7,36 +7,13 @@ var ShardLogicController = require('../lib/shard/logic');
 // Shard Network Module
 var lib = {};
 
-/* quick access shard list */
-var gen = require("./genblock");
-gen.minerAddress = "0x99999999999";
-lib.shardList = {
-    ["0x01"]: {
-        blocks: { 0: gen },
-        pollHash: "0x01",
-        localChainLength: 0,
-        // genesisBlockHash:
-    }
-}
+// Temp Shard List
+lib.shardList = {};
 
-
-//console.log(shardBlockHelpers.hashWithNonce(gen, "1301477867"));
-
-
-/* save list via level db*/
-
-lib.saveShards = function (data) {
-    var db = helpers.level("./db/shards");
-    for (var shardID in data) {
-        var shardData = data[shardID];
-        db.put(shardID, shardData);     // store each shardid as a key / val
-    }
-    db.close();
-
-    helpers.log("Saved updated shard list");
-}
-
-
+/*
+  This function makes a call to the API server given a command and
+  a callback.
+*/
 lib.queryAPIServer = function (command, callbackFunction) {
     helpers.http.get({
         host: process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST,
@@ -61,32 +38,6 @@ lib.queryAPIServer = function (command, callbackFunction) {
         });
     });
 }
-
-/* grab list of shards from OpenPoll API server */
-lib.getShards = function (callbackFunction) {
-    lib.queryAPIServer("getshards", function (jdata) {
-        lib.saveShards(jdata); // save the new list
-        lib.shardList = jdata; // quick access
-
-        /* pass the new list back to callback function if provided */
-        if (callbackFunction) {
-            callbackFunction(jdata);
-        }
-    });
-}
-
-/* request details about shard (peers/miners/blocks?)*/
-lib.queryShardData = function (shardID, ) {
-    if (!lib.shardList[shardID]) {
-        /* ERROR POINT INVALID SHARD */
-
-        return false;
-    }
-    lib.queryAPIServer(`shard/${shardID}/latest`, function (jdata) {
-        console.log(jdata);
-    });
-}
-
 
 lib.startMining = function (shardID) {
     if (!lib.shardList[shardID]) {
