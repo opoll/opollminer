@@ -1,6 +1,6 @@
-﻿var genisis = {
+﻿var blankblock = {
     blockId: 0,
-    pollHash: "0x01",
+    pollHash: "",
     timestamp: 0,
     prevHash: "",
     responses: {},
@@ -8,5 +8,5 @@
     nonce: 0,
     hash: "",
 };
-
-module.exports = genisis;
+var copy = Object.assign( {}, blankblock );
+module.exports = copy;

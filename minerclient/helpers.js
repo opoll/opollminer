@@ -1,6 +1,7 @@
 ﻿exports.http = require('http');
 exports.url = require('url');
-exports.mongoose = require('mongoose');
+exports.bigInt = require("big-integer");
+//exports.mongoose = require('mongoose');
 exports.level = require("level");
 exports.bodyParser = require('body-parser');
 exports.readline = require('readline');
