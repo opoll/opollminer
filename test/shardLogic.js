@@ -37,7 +37,7 @@ describe( 'the shard logic controller', function() {
         // Fetch the pool
         tLib.PoolManager.getResponsePool( simpleResponse.pollHash ).then( rPool => {
           var found = false;
-          
+
           // Make sure the response is in there..
           rPool.forEach( function( pooledResp ) {
             if( pooledResp.responseHash === simpleResponse.responseHash ) {
@@ -98,6 +98,22 @@ describe( 'the shard logic controller', function() {
         tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
           expect( activeShards.includes( 'OOP' ) ).to.be.true;
           done();
+        } );
+      } );
+
+    } );
+
+    it( 'should not record duplicates', function( done ) {
+      tLib.ActiveShardsModule.getActiveShards( function( activeShards ) {
+        var l = activeShards.length;
+
+        tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS', function() {
+        tLib.ActiveShardsModule.recordActiveShard( 'JASDJASKS', function() {
+          tLib.ActiveShardsModule.getActiveShards( function( activeShards2 ) {
+            expect( activeShards2.length ).to.equal( l + 1 );
+            done();
+          } );
+        } );
         } );
       } );
     } );
