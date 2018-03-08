@@ -7,6 +7,47 @@ var ShardLogicController = require('../lib/shard/logic');
 // Shard Network Module
 var lib = {};
 
+/* quick access shard list */
+var blankMeta = require("./genblock");
+lib.generateBlankBlock = function () {
+    var newblock = Object.assign({}, blankMeta);
+    return newblock;
+
+}
+var gen = lib.generateBlankBlock();
+//gen.pollHash = "0x01";
+//gen.minerAddress = "0x99999999999";
+
+var gen2 = lib.generateBlankBlock();
+//gen2.pollHash = "0x02";
+//gen2.minerAddress = "0x99999999998";
+lib.shardList = {
+    ["0x01"]: {
+        blocks: { 0: gen },
+        pollHash: "0x01",
+        localChainLength: 0,
+        // genesisBlockHash:
+    },
+    ["0x02"]: {
+    blocks: { 0: gen2 },
+    pollHash: "0x02",
+        localChainLength: 0,
+        // genesisBlockHash:
+    }
+}
+
+/* save list via level db*/
+lib.saveShards = function (data) {
+    var db = helpers.level("./db/shards");
+    for (var shardID in data) {
+        var shardData = data[shardID];
+        db.put(shardID, shardData);     // store each shardid as a key / val
+    }
+    db.close();
+
+    helpers.log("Saved updated shard list");
+}
+
 // The API URL
 lib.API_URL = (process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST);
 
@@ -42,20 +83,62 @@ lib.queryAPIServer = function (command, callbackFunction) {
     });
 }
 
+/* grab list of shards from OpenPoll API server */
+lib.getShards = function (callbackFunction) {
+    lib.queryAPIServer("getshards", function (jdata) {
+        lib.saveShards(jdata); // save the new list
+        lib.shardList = jdata; // quick access
+
+        /* pass the new list back to callback function if provided */
+        if (callbackFunction) {
+            callbackFunction(jdata);
+        }
+    });
+}
+
+/* request details about shard (peers/miners/blocks?)*/
+lib.queryShardData = function (shardID, ) {
+    if (!lib.shardList[shardID]) {
+        /* ERROR POINT INVALID SHARD */
+
+        return false;
+    }
+    lib.queryAPIServer(`shard/${shardID}/latest`, function (jdata) {
+        console.log(jdata);
+    });
+}
+
+lib.generateLatestBlock = function (shardID) {
+    var dat = lib.shardList[shardID];
+    var previousBlock = dat.blocks[dat.localChainLength];
+    var newBlock = lib.generateBlankBlock();
+    newBlock.prevHash = shardBlockHelpers.hashWithNonce(previousBlock, "0");
+    newBlock.pollHash = shardID;
+
+    /* SET MINER ADDRESS */
+    newBlock.minerAddress = "bullshit address";
+    console.log("SHARD BLOCK:", newBlock);
+    return newBlock;
+}
+
 lib.startMining = function (shardID) {
     if (!lib.shardList[shardID]) {
         return false;
     }
     var dat = lib.shardList[shardID];
-    var block = dat.blocks[dat.localChainLength];
-    global.POWController.currentBlock = block;
-    global.POWController.MinerCommand("max");
-    global.POWController.MinerCommand(global.POWController.maxHashString);
-    global.POWController.MinerCommand("mine");
+  //  var previousBlock = dat.blocks[dat.localChainLength];
+    var block = lib.generateLatestBlock(shardID);
+   
+    var powC = global.POWController;
+   // powC.currentBlock = block;
+
+    powC.MinerCommand("mine");  //tell cpp miner we are mining a shard
+    powC.MinerCommand(shardID); //tell cpp miner the unique shardid
+    powC.MinerCommand(powC.maxHashString); //tell cpp miner the dificulty of this shard block
     for (var v of shardBlockHelpers.orderedHashFields(block)) {
-        global.POWController.MinerCommand(v);
+        powC.MinerCommand(v);
     }
-    global.POWController.MinerCommand("done");
+    powC.MinerCommand("done");
 }
 
 /*
