@@ -19,6 +19,24 @@ module.exports = function ( CLI, ShardLogicController ) {
         } );
     }, "list shards");
 
+    CLI.AddCommand("listworkedshards", async function (args) {
+        // Fetch all the shards this miner has chosen to work
+        var workedShardsArr = await ShardLogicController.WorkedShardsModule.getWorkedShards();
+
+        // If there are none..
+        if( workedShardsArr.length == 0 ) {
+          helpers.log( "you are not working any shards" );
+          return;
+        }
+
+        // Print all the shards..
+        helpers.log( "you are working " + workedShardsArr.length + " shard(s)" );
+
+        workedShardsArr.forEach( function( pollHash ) {
+          console.log( "\t" + pollHash );
+        } );
+    }, "lists all shards this client has choosen to work");
+
     /*
     CLI.AddCommand("listblocks", function (args) {
         helpers.log(CLI.NetworkModule.API.shardList[args[1]].blocks);
