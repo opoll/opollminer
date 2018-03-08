@@ -1,7 +1,7 @@
 ﻿var helpers = require("../helpers");
 
-module.exports = function (CLI) {
-   
+module.exports = function ( CLI, ShardLogicController ) {
+
     CLI.AddCommand("help", function (args) {
 
         for (var cmd in CLI.CommandList) {
@@ -11,7 +11,7 @@ module.exports = function (CLI) {
             } else {
                 console.log(helpers.chalk.greenBright(cmd));
             }
-            
+
         }
     }, "List available commands");
 }

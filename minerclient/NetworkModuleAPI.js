@@ -7,6 +7,9 @@ var ShardLogicController = require('../lib/shard/logic');
 // Shard Network Module
 var lib = {};
 
+// The API URL
+lib.API_URL = (process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST);
+
 // Temp Shard List
 lib.shardList = {};
 
