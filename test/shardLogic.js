@@ -170,35 +170,32 @@ describe( 'the shard logic controller', function() {
 
   describe( 'poll manager module', function() {
 
-    it( 'should persist valid polls', function( done ) {
+    it( 'should persist valid polls', async function( done ) {
       var poll = { hash: "hja98sdh98ashdasd" };
 
       // Persist the poll
-      tLib.PollManager.persistValidPoll( poll ).then( () => {
-        // Get all known hashes
-        return tLib.PollManager.knownPollHashes();
-      } ).then( hashes => {
-        // Make sure it includes the poll we persisted earlier
-        expect( hashes.includes( poll.hash ) ).to.be.true;
-        done();
-      } );
+      await tLib.PollManager.persistValidPoll( poll );
 
+      // Get all known poll hashes
+      var hashes = await tLib.PollManager.knownPollHashes();
+
+      // Make sure it includes the poll we persisted earlier
+      expect( hashes.includes( poll.hash ) ).to.be.true;
+      done();
     } );
 
-    it( 'should properly fetch polls', function( done ) {
-
+    it( 'should properly fetch polls', async function( done ) {
       var poll = { hash: "0aadsf0jsadfsdaf", k: 5 };
 
       // Save a poll
-      tLib.PollManager.persistValidPoll( poll ).then( () => {
-        // Get all known hashes
-        return tLib.PollManager.fetchPoll( poll.hash );
-      } ).then( pollObj => {
-        // Make sure it returned the poll we provided earlier
-        expect( pollObj.k ).to.equal( 5 );
-        done();
-      } );
+      await tLib.PollManager.persistValidPoll( poll );
 
+      // Fetch the poll associated with this hash
+      var pollObj = await tLib.PollManager.fetchPoll( poll.hash );
+
+      // Make sure it returned the poll we provided earlier
+      expect( pollObj.k ).to.equal( 5 );
+      done();
     } );
 
   } );
