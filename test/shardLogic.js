@@ -113,37 +113,38 @@ describe( 'the shard logic controller', function() {
       } );
     } );
 
-    it( 'should determine if a shard is active correctly', function( done ) {
+    it( 'should determine if a shard is active correctly', async function( done ) {
       var shardObj = { pollHash: "POLL-1234", localRespondents: [] };
       var pollObj = { hash: "POLL-1234", name: "Do you support Donald Trump?", expiry: (new Date()/1000) + 50 };
 
       // Save this poll
-      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
-        // Determine if the shard is active
-        tLib.ActiveShardsModule.isShardActive( shardObj )
-          .then( () => { done(); } )
-          .catch( (err) => { expect(true).to.be.false; done(); } );
-      } );
+      var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
+
+      // Determine if the shard is active
+      tLib.ActiveShardsModule.isShardActive( shardObj )
+        .then( () => { done(); } )
+        .catch( (err) => { expect(true).to.be.false; done(); } );
     } );
 
-    it( 'should determine a shard inactive if the poll expired', function( done ) {
+    it( 'should determine a shard inactive if the poll expired', async function( done ) {
       var shardObj = { pollHash: "POLL-12345", localRespondents: [] };
       var pollObj = { hash: "POLL-12345", name: "Do you support Donald Trump?", expiry: (new Date()/1000) - 50 };
 
       // Save this poll
-      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
-        tLib.ActiveShardsModule.isShardActive( shardObj )
-          .then( (shard) => {
-            expect( true ).to.be.false;
-          } )
-          .catch( (err) => {
-            expect( err ).to.equal( "poll is expired" );
-            done();
-          } );
-      } );
+      var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
+
+      tLib.ActiveShardsModule.isShardActive( shardObj )
+        .then( (shard) => {
+          expect( true ).to.be.false;
+        } )
+        .catch( (err) => {
+          expect( err ).to.equal( "poll is expired" );
+          done();
+        } );
+
     } );
 
-    it( 'should determine a shard inactive if the max respondents was reached', function( done ) {
+    it( 'should determine a shard inactive if the max respondents was reached', async function( done ) {
       // Basic factories in need of reafactoring (hah!)
       var shardObj = { pollHash: "POLL-12345", localRespondents: [1,2] };
       var pollObj = {
@@ -154,16 +155,16 @@ describe( 'the shard logic controller', function() {
       };
 
       // Save this poll
-      tLib.PollManager.persistValidPoll( pollObj ).then( () => {
-        tLib.ActiveShardsModule.isShardActive( shardObj )
-          .then( (shard) => {
-            expect( true ).to.be.false;
-          } )
-          .catch( (err) => {
-            expect( err ).to.equal( "poll hit the maximum number of respondents" );
-            done();
-          } );
-      } );
+      var pollObj = await tLib.PollManager.persistValidPoll( pollObj );
+
+      tLib.ActiveShardsModule.isShardActive( shardObj )
+        .then( (shard) => {
+          expect( true ).to.be.false;
+        } )
+        .catch( (err) => {
+          expect( err ).to.equal( "poll hit the maximum number of respondents" );
+          done();
+        } );
     } );
 
   } );
@@ -202,36 +203,40 @@ describe( 'the shard logic controller', function() {
 
   describe( 'shard local storage functionality', function() {
 
-    it( "should return false when locally getting a shard that does not exist", function( done ) {
-      tLib.localGetShard( "XX", function( res ) {
+    it( "should return false when locally getting a shard that does not exist", async function( done ) {
+      try {
+        var res = await tLib.localGetShard( "XX" );
         expect( res ).to.be.false;
+      } catch(exception) {
         done();
-      } );
+      };
     } );
 
-    it( "should store and retreive a semi-valid shard", function( done ) {
-      tLib.localStoreValidShard( { pollHash: "X", genesisBlock: "ABC" }, function() {
-        tLib.localGetShard( "X", function( obj ) {
-          expect( obj.genesisBlock ).to.equal( "ABC" );
-          done();
-        } );
-      } );
+    it( "should store and retreive a semi-valid shard", async function( done ) {
+      await tLib.localStoreValidShard( { pollHash: "X", genesisBlock: "ABC" } );
+
+      try {
+        var obj = await tLib.localGetShard( "X" );
+        expect( obj.genesisBlock ).to.equal( "ABC" );
+        done();
+      } catch(ex) {}
     } );
 
-    it( "should delete shards", function( done ) {
+    it( "should delete shards", async function( done ) {
       var shardObj = { pollHash: "Z", genesisBlock: "ABC" };
 
       // store the object
-      tLib.localStoreValidShard( shardObj, function() {
-        // wipe the object
-        tLib.wipePollShard( shardObj, function() {
-          // ensure we can't get it again
-          tLib.localGetShard( shardObj.pollHash, function( obj ) {
-            expect( obj ).to.be.false;
-            done();
-          } );
-        } );
-      } );
+      await tLib.localStoreValidShard( shardObj );
+      await tLib.wipePollShard( shardObj );
+
+      // Attempting to load shard should error
+      try {
+        var obj = await tLib.localGetShard( shardObj.pollHash );
+        expect( true ).to.be.false;
+      } catch(ex) {
+        done();
+      }
+
     } );
 
   } );
