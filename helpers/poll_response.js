@@ -83,7 +83,7 @@ lib.hash = function( o, digestType = "hex" ) {
 */
 lib.hashResponses = function( pollResponseArr, digestType = "hex" ) {
   // Create HMAC with basic block information
-  var hmac = crypto.createHmac( 'sha256', '' );
+  var hmac = crypto.createHash( 'sha256' );
 
   // Loop through all provided poll responses
   pollResponseArr.forEach( function( pollObj ) {
