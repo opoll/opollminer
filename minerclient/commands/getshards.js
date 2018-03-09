@@ -5,7 +5,6 @@ module.exports = function ( CLI, ShardLogicController ) {
     CLI.AddCommand("listshards", async function (args) {
         // Get the list of shards from the Active Shards Module
         var activeShards = await ShardLogicController.ActiveShardsModule.getActiveShards();
-
         // Loop through all keys in the activeShards table
         Object.keys( activeShards ).forEach( function( pollHash ) {
           // Get the metadata associated with this shard
@@ -15,7 +14,8 @@ module.exports = function ( CLI, ShardLogicController ) {
           helpers.log( "Shard (pollHash): " + pollHash );
           console.log( "\t- Poll Name: " + shardMetadata.pollName );
           console.log( "\t- Num Miners: " + shardMetadata.numMiners );
-          console.log( "\t- Difficulty: " + shardMetadata.difficulty );
+          console.log("\t- Difficulty: " + shardMetadata.difficulty);
+         
         } );
     }, "list shards");
 

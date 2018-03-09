@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\test_minerconsole\test_minerconsole\obj\Release\test_minerconsole.njsproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\test_minerconsole\test_minerconsole\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Users\Administrator\source\repos\test_minerconsole\test_minerconsole\obj\Release\test_minerconsole.njsprojResolveAssemblyReference.cache
+C:\Users\Jyugo\source\repos\test_minerconsole\test_minerconsole\obj\Release\test_minerconsole.njsprojResolveAssemblyReference.cache
+C:\Users\Jyugo\source\repos\test_minerconsole\test_minerconsole\obj\Release\test_minerconsole.njsproj.CoreCompileInputs.cache
+C:\Users\Jyugo\source\repos\test_minerconsole\test_minerconsole\bin\Microsoft.NodejsTools.WebRole.dll
