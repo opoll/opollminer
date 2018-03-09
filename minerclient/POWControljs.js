@@ -1,8 +1,10 @@
 ﻿
 var helpers = require("./helpers");
-var shardBlockHelpers = require('../helpers/shard_block');
+var ShardBlockHelper = require('../helpers/shard_block');
 
-shardBlockHelpers.shardAPI = require("./NetworkModuleAPI");
+var ShardLogicController = undefined; // gets assigned after module is loaded
+
+//shardBlockHelpers.shardAPI = require("./NetworkModuleAPI");
 
 // POWController is a Singleton
 if (global.POWController) {
@@ -16,17 +18,26 @@ POWControl.maxHashNumber = helpers.bigInt(POWControl.maxHashString, 256);
 
 
 /* this is called when the cpp miner completes a shard, it passes shardid completed and the nonce */
-POWControl.OnHashMined = function (shardID, nonce) {
+POWControl.OnHashMined = async function (shardID, nonce) {
     
-    var block = shardBlockHelpers.shardAPI.generateLatestBlock(shardID);
+    var block = await POWControl.generateLatestBlock(shardID);
     //global.POWController.currentBlock; // incorrect use now that it supports multiple shards
-    var hash = shardBlockHelpers.hashWithNonce(block, nonce);
+   // console.log(block);
+    var hash = ShardBlockHelper.hashWithNonce(block, nonce);
 
     var hashInt = helpers.bigInt(hash, 256);
     if (hashInt.lesserOrEquals(POWControl.maxHashNumber)) {
-        helpers.log("HASH IS SUCCESS");
+        helpers.log("HASH IS SUCCESS "+hash);
+        block.nonce = nonce;
+       
+        var activeShards = await ShardLogicController.ActiveShardsModule.getActiveShards();
+        activeShards[shardID].blocks[block.blockId] = block;
+        await ShardLogicController.ActiveShardsModule.saveActiveShards();
+
+        console.log(activeShards[shardID].blocks);
+       // await ;
     }
-    console.log("SHARD = ", shardID, hash, nonce);
+    //console.log("SHARD = ", shardID, hash, nonce);
 }
 
 POWControl.MinerCommand = function (cmd) {
@@ -72,5 +83,73 @@ POWControl.CreateMiner = function () {
 
 
 }
+
+/* TEMP FUNCTIONs*/
+
+var blankMeta = require("./genblock");
+POWControl.generateBlankBlock = function () {
+    var newblock = Object.assign({}, blankMeta);
+    return newblock;
+
+}
+
+POWControl.generateLatestBlock = async function (shardID) {
+
+    var activeShards = await ShardLogicController.ActiveShardsModule.getActiveShards();
+   // console.log(activeShards);
+    var dat = activeShards[shardID];
+    if (!dat.blocks) {
+        dat.blocks = {};
+        var genesis = POWControl.generateBlankBlock();
+        genesis.pollHash = shardID;
+        dat.blocks[0] = genesis;
+       
+        await ShardLogicController.ActiveShardsModule.saveActiveShards(activeShards);
+    }
+    var latestBlockNumber = Object.keys(dat.blocks).length - 1; // subtract one because array starts at 0;
+    var previousBlock = dat.blocks[latestBlockNumber];
+   
+
+    var newBlock = POWControl.generateBlankBlock();
+    newBlock.prevHash = ShardBlockHelper.hashWithNonce(previousBlock, previousBlock.nonce.toString());
+    newBlock.pollHash = shardID;
+    newBlock.blockId = latestBlockNumber + 1;
+    /* SET MINER ADDRESS */
+    newBlock.minerAddress = "bullshit address";
+    //console.log("SHARD BLOCK:", newBlock);
+    return newBlock;
+}
+
+
+POWControl.StartMining = async function (shardID) {
+
+    var activeShards = await ShardLogicController.ActiveShardsModule.getActiveShards();
+
+    if (!activeShards[shardID]) {
+        helpers.log("something went wrong, shard not found")
+        return false;
+    }
+    var dat = activeShards[shardID];
+    //  var previousBlock = dat.blocks[dat.localChainLength];
+    var block = await POWControl.generateLatestBlock(shardID);
+   // console.log(block);
+
+    // powC.currentBlock = block;
+
+    POWControl.MinerCommand("mine");  //tell cpp miner we are mining a shard
+    POWControl.MinerCommand(shardID); //tell cpp miner the unique shardid
+    POWControl.MinerCommand(POWControl.maxHashString); //tell cpp miner the dificulty of this shard block
+    for (var v of ShardBlockHelper.orderedHashFields(block)) {
+        POWControl.MinerCommand(v);
+    }
+    POWControl.MinerCommand("done");
+}
+
 global.POWController = POWControl;
-module.exports = POWControl;
+//module.exports = POWControl;
+
+
+module.exports = function (databases, controller) {
+    ShardLogicController = controller;
+    return POWControl;
+}
