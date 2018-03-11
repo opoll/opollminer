@@ -19,23 +19,29 @@ POWControl.maxHashNumber = helpers.bigInt(POWControl.maxHashString, 256);
 
 /* this is called when the cpp miner completes a shard, it passes shardid completed and the nonce */
 POWControl.OnHashMined = async function (shardID, nonce) {
-    
+
     var block = await POWControl.generateLatestBlock(shardID);
     //global.POWController.currentBlock; // incorrect use now that it supports multiple shards
    // console.log(block);
-    var hash = ShardBlockHelper.hashWithNonce(block, nonce);
+
+   block.nonce = nonce;
+   console.log( block );
+
+    var hash = ShardBlockHelper.hash(block);
 
     var hashInt = helpers.bigInt(hash, 256);
     if (hashInt.lesserOrEquals(POWControl.maxHashNumber)) {
         helpers.log("HASH IS SUCCESS "+hash);
         block.nonce = nonce;
-       
+
         var activeShards = await ShardLogicController.ActiveShardsModule.getActiveShards();
         activeShards[shardID].blocks[block.blockId] = block;
         await ShardLogicController.ActiveShardsModule.saveActiveShards();
 
         console.log(activeShards[shardID].blocks);
        // await ;
+    } else {
+      helpers.log( "HASH FAILURE: " + hash );
     }
     //console.log("SHARD = ", shardID, hash, nonce);
 }
@@ -73,14 +79,12 @@ POWControl.CreateMiner = function () {
         } else {
             console.log("[" + helpers.chalk.cyan("MINER") + "]", data.toString());
         }
-        
+
     });
     POWControl.miner.on('close', (code) => {
         POWControl.miner = undefined;
     });
    // POWControl.miner.stdin.write("dfkslgjdsfkolgjsdfglkdsfjglk\n");
-
-
 
 }
 
@@ -103,15 +107,15 @@ POWControl.generateLatestBlock = async function (shardID) {
         var genesis = POWControl.generateBlankBlock();
         genesis.pollHash = shardID;
         dat.blocks[0] = genesis;
-       
+
         await ShardLogicController.ActiveShardsModule.saveActiveShards(activeShards);
     }
     var latestBlockNumber = Object.keys(dat.blocks).length - 1; // subtract one because array starts at 0;
     var previousBlock = dat.blocks[latestBlockNumber];
-   
+
 
     var newBlock = POWControl.generateBlankBlock();
-    newBlock.prevHash = ShardBlockHelper.hashWithNonce(previousBlock, previousBlock.nonce.toString());
+    newBlock.prevHash = ShardBlockHelper.hash( previousBlock );
     newBlock.pollHash = shardID;
     newBlock.blockId = latestBlockNumber + 1;
     /* SET MINER ADDRESS */
@@ -139,7 +143,7 @@ POWControl.StartMining = async function (shardID) {
     POWControl.MinerCommand("mine");  //tell cpp miner we are mining a shard
     POWControl.MinerCommand(shardID); //tell cpp miner the unique shardid
     POWControl.MinerCommand(POWControl.maxHashString); //tell cpp miner the dificulty of this shard block
-    for (var v of ShardBlockHelper.orderedHashFields(block)) {
+    for (var v of ShardBlockHelper.orderedHashFields(block, ignoreNonce = true)) {
         POWControl.MinerCommand(v);
     }
     POWControl.MinerCommand("done");
@@ -148,6 +152,7 @@ POWControl.StartMining = async function (shardID) {
 global.POWController = POWControl;
 //module.exports = POWControl;
 
+var proxy = require( './proxy' )( POWControl );
 
 module.exports = function (databases, controller) {
     ShardLogicController = controller;
