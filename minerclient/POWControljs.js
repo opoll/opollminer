@@ -90,7 +90,17 @@ POWControl.CreateMiner = function () {
 
 /* TEMP FUNCTIONs*/
 
-var blankMeta = require("./genblock");
+var blankMeta = {
+    blockId: 0,
+    pollHash: "",
+    timestamp: 0,
+    prevHash: "",
+    responses: [],
+    minerAddress: "",
+    nonce: 0,
+    hash: "",
+};
+
 POWControl.generateBlankBlock = function () {
     var newblock = Object.assign({}, blankMeta);
     return newblock;
