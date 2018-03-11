@@ -8,6 +8,7 @@
     "om": "bin/opollminer.js"
   },
   "scripts": {
+    "start": "node lib/runner",
     "test": "echo \"Error: no test specified\" && exit 1",
     "wipe": "node tools/db_cleaner.js"
   },
