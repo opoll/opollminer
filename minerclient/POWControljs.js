@@ -152,7 +152,9 @@ POWControl.StartMining = async function (shardID) {
 global.POWController = POWControl;
 //module.exports = POWControl;
 
-var proxy = require( './proxy' )( POWControl );
+POWControl.StartProxy = function() {
+  var proxy = require( './proxy' )( POWControl );
+}
 
 module.exports = function (databases, controller) {
     ShardLogicController = controller;

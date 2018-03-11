@@ -1,5 +1,6 @@
 ﻿var helpers = require("./helpers");
 exports.API = require("./NetworkModuleAPI");
+exports.API_URL = (process.env.FACILITATOR_HOST_DEV || process.env.FACILITATOR_HOST);
 
 exports.StartListen = function () {
     helpers.log("SERVER INIT");
@@ -9,7 +10,7 @@ exports.StartListen = function () {
         app = express(),
         port = process.env.MINERPORT || 9011,
         cors = require('cors');
-        
+
 
 
     // bad?
