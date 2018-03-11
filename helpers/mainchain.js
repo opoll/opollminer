@@ -24,26 +24,26 @@ mainchainHelpers.validateBlockSchema = function( mainChainBlock ) {
   DO NOT USE THIS FOR MINING, VERY SLOW
 */
 mainchainHelpers.computeBlockHash = function( mainChainBlock, digestType = "hex" ) {
-  // Create HMAC with basic block information
-  var hmac = crypto.createHmac( 'sha256', '' )
+  // Create pre-digest hash with basic block information
+  var preDigestHash = crypto.createHash( 'sha256' )
             .update( mainChainBlock.blockId.toString() )
             .update( mainChainBlock.timestamp.toString() )
             .update( mainChainBlock.prevHash )
             .update( mainChainBlock.minerAddress )
             .update( mainChainBlock.difficulty.toString() );
 
-  // Update the HMAC with transaction data
+  // Update the pre-digest hash with transaction data
   // TODO
 
-  // Update the HMAC with shard data
+  // Update the pre-digest hash with shard data
   // TODO
 
   // Add the nonce (if it exists)
   if( mainChainBlock.nonce && (mainChainBlock.nonce.toString() != "0") )
-    hmac = hmac.update( mainChainBlock.nonce.toString() );
+    preDigestHash = preDigestHash.update( mainChainBlock.nonce.toString() );
 
   // Grab a hex digest and return
-  return hmac.digest( digestType );
+  return preDigestHash.digest( digestType );
 }
 
 // Export the library

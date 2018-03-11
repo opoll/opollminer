@@ -5,6 +5,9 @@ var NodeRSA = require('node-rsa');
 var schemaValidator = require('jsonschema').validate;
 var helper_generic = require('./blockchain_generic');
 
+// Helper Imports
+var ShardBlockHelper = require( './shard_block' );
+
 // Create the library
 var lib = {};
 
@@ -26,6 +29,34 @@ lib.validateSchema = function( obj ) {
 // Returns if a poll is expired
 lib.isExpired = function( poll ) {
   return (poll.expiry < (new Date() / 1000));
+}
+
+/*
+  Provided a valid poll object, this function will create a corresponding
+  genesis /shard/block for this poll. The poll genesis block is deterministic
+  based off a /poll/poll object. It does not confirm to schema as schema requires
+  there me at least 1 response, however, the genesis block includes 0 responses.
+*/
+lib.generateGenesisBlock = function( pollObj ) {
+  // Hash the poll
+  lib.hash( pollObj );
+
+  // Create the genesis block
+  var POLL_GENESIS_BLOCK = {
+    "blockId": 0,
+    "pollHash": pollObj.hash,
+    "timestamp": pollObj.timestamp,
+    "prevHash": "0".repeat( 64 ),
+    "responses": [],
+    "minerAddress": "0".repeat( 64 ),
+    "nonce": 0
+  };
+
+  // Hash the genesis block
+  ShardBlockHelper.hash( POLL_GENESIS_BLOCK );
+
+  // Return the genesis block
+  return POLL_GENESIS_BLOCK;
 }
 
 /*

@@ -22,7 +22,7 @@ lib.publicKeyToAddress = function( pubKey ) {
   hash
 */
 lib.hashFromOrderedFields = function( arr, digestType = "hex" ) {
-  var hmac = crypto.createHmac( 'sha256', '' );
+  var hmac = crypto.createHash( 'sha256' );
 
   arr.forEach( function( v ) {
     hmac = hmac.update( v );

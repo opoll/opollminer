@@ -8,7 +8,9 @@
     "om": "bin/opollminer.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node lib/runner",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wipe": "node tools/db_cleaner.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +19,7 @@
     "url": "https://github.com/opoll/opollminer.git"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "big-integer": "^1.6.26",
     "body-parser": "^1.18.2",
     "bs58check": "^2.1.1",
@@ -29,9 +32,11 @@
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
     "ip": "^1.1.5",
+    "jsonschema": "^1.2.2",
     "level": "^3.0.0",
     "level-sublevel": "^6.6.1",
     "levelup": "^2.0.2",
+    "node-rsa": "^0.4.2",
     "path": "^0.12.7",
     "ramda": "^0.25.0",
     "ripemd160": "^2.0.1",
