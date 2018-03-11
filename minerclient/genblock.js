@@ -3,7 +3,7 @@
     pollHash: "",
     timestamp: 0,
     prevHash: "",
-    responses: {},
+    responses: [],
     minerAddress: "",
     nonce: 0,
     hash: "",

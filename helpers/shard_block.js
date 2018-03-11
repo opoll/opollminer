@@ -22,8 +22,9 @@ lib.validateSchema = function( obj ) {
 }
 
 /*
-  This function produces a hash representing this shard block
-  A shard block hash includes the following fields:
+  Returns an array of ordered hash fields which are used in creating the
+  hash for this specific shard block object. Set ignoreNonce to true if
+  you do not want the nonce included in the set.
     * blockId
     * pollHash
     * timestamp
@@ -32,60 +33,45 @@ lib.validateSchema = function( obj ) {
     * minerAddress
     * nonce
 */
-
-lib.orderedHashFields = function( shardBlockObj ) {
+lib.orderedHashFields = function( shardBlockObj, ignoreNonce = false ) {
   var arr = [
     shardBlockObj.blockId.toString(),
-    shardBlockObj.pollHash.toString(),
+    shardBlockObj.pollHash,
     shardBlockObj.timestamp.toString(),
-    shardBlockObj.prevHash.toString(),
-    shardBlockObj.minerAddress.toString(),
-	//shardBlockObj.nonce.toString(), not needed for the cpp miner
+    shardBlockObj.prevHash,
+    shardBlockObj.minerAddress
   ];
-  
-	/* INCLUDE REESPONSES HERE TOO
-	.update( helper_poll_response.hashResponses( shardBlockObj.responses ) )
-	
-	*/
+
+  // Hash the responses and add those
+  arr.push( helper_poll_response.hashResponses( shardBlockObj.responses ) );
+
+  // If we aren't ignoring the nonce, add it
+  if( ignoreNonce !== true ) {
+    arr.push( shardBlockObj.nonce.toString() );
+  }
+
   return arr;
 }
 
-lib.hashWithNonce = function( shardBlockObj, nonce, digestType = "hex" ) {
-  // Create HMAC with basic block information
-  var hmac = crypto.createHash( 'sha256')
-            .update( shardBlockObj.blockId.toString() )
-            .update( shardBlockObj.pollHash.toString() )
-            .update( shardBlockObj.timestamp.toString() )
-            .update( shardBlockObj.prevHash.toString() )
-           // .update( helper_poll_response.hashResponses( shardBlockObj.responses ) ) //include responses
-            .update( shardBlockObj.minerAddress.toString() )
-            //.update( shardBlockObj.nonce.toString() )
-			.update(nonce.toString());
+/*
+  Hashes the provided shard block, and returns the hash
+*/
+lib.hash = function( shardBlockObj, ignoreNonce = false, digestType = "hex" ) {
+  // Get the ordered hash fields
+  var hashFields = lib.orderedHashFields( shardBlockObj, ignoreNonce );
 
-  // Grab a hex digest and return
-  return hmac.digest( digestType );
-}
+  // Update the hash on the poll object
+  shardBlockObj.hash = helper_generic.hashFromOrderedFields( hashFields, digestType );
 
-lib.hash = function( shardBlockObj, digestType = "hex" ) {
-  // Create HMAC with basic block information
-  var hmac = crypto.createHash( 'sha256' )
-            .update( shardBlockObj.blockId.toString() )
-            .update( shardBlockObj.pollHash.toString() )
-            .update( shardBlockObj.timestamp.toString() )
-            .update( shardBlockObj.prevHash.toString() )
-           // .update( helper_poll_response.hashResponses( shardBlockObj.responses ) )
-            .update( shardBlockObj.minerAddress.toString() )
-            .update( shardBlockObj.nonce.toString() );
-
-  // Grab a hex digest and return
-  return hmac.digest( digestType );
+  // Return the hash
+  return shardBlockObj.hash;
 }
 
 /*
   Returns true if a given shard block is the genesis block
 */
 lib.isGenesis = function( shardBlockObj ) {
-  return ( shardBlockObj.prevHash == "0".repeat(64) );
+  return ( shardBlockObj.prevHash === "0".repeat(64) );
 }
 
 /*

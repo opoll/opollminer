@@ -42,5 +42,7 @@ module.exports.initialize = function( ShardLogicController ) {
 
     // Load Commands
     require("./commands/help")( exports, ShardLogicController );
-    require("./commands/getshards")( exports, ShardLogicController );
+    require("./commands/getshards")(exports, ShardLogicController);
+
+    require("./commands/mine")(exports, ShardLogicController);
 }

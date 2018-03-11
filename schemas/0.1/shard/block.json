@@ -60,7 +60,7 @@
       "type": "string",
       "description": "hash of this block",
       "pattern": "^[0-9A-Fa-f]{64}$"
-    },
+    }
 
   },
 
