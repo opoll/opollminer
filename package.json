@@ -2,14 +2,11 @@
   "name": "opollminer",
   "version": "0.1.0",
   "description": "Mining application for OpenPoll Polling Platform",
-  "main": "index.js",
-  "preferGlobal": true,
-  "bin": {
-    "om": "bin/opollminer.js"
-  },
   "scripts": {
     "start": "node lib/runner",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "load": "node tools/db_loader.js",
+    "fetch": "node tools/db_fetcher.js",
     "wipe": "node tools/db_cleaner.js"
   },
   "author": "",
@@ -32,6 +29,7 @@
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
     "ip": "^1.1.5",
+    "jsonfile": "^4.0.0",
     "jsonschema": "^1.2.2",
     "level": "^3.0.0",
     "level-sublevel": "^6.6.1",
