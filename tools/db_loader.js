@@ -2,14 +2,7 @@ const level = require('level');
 const fs = require('fs');
 const R = require('ramda');
 
-const databases = {
-  ShardMiner: level( `./db/shard_miner` ), // General Key-Value store for miscellaneous data.   Maps: K -> V (miscellaneous storage)
-  Wallets: level( `./db/wallets` ), // Storage for wallets by ID.                               Maps: walletId -> wallet/wallet (wallet storage)
-  Polls: level( `./db/polls` ), // Storage for general information on a poll.                   Maps: pollHash -> /poll/poll (general poll info storage)
-  Shards: level( `./db/shards` ), // Storage for general information on a shard.                Maps: pollHash -> /shard/shard (local shard mining data storage)
-  ShardBlocks: level( `./db/shard_blocks` ), // Storage for shard blocks.                       Maps: blockHash -> /shard/block (shard block storage)
-  ResponsePool: level( `./db/shard_pool` ), // Storage for shard's response pool                Maps: pollHash -> Array of /poll/response
-};
+const databases = require('../lib/databases');
 
 const testJson = {
   Wallets: 'test/data/wallets.json'
