@@ -1,6 +1,6 @@
 const level = require('level');
 
-const databases = require('../lib/databases');
+const databases = require('../lib/util/databases');
 
 const walletIds = [
   "5780547968e7984936ef052b1629087ba0deebd36559dd94505cb0f0d04f3658",

@@ -2,7 +2,7 @@ const level = require('level');
 const fs = require('fs');
 const R = require('ramda');
 
-const databases = require('../lib/databases');
+const databases = require('../lib/util/databases');
 
 const testJson = {
   Wallets: 'test/data/wallets.json'
