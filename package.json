@@ -2,11 +2,6 @@
   "name": "opollminer",
   "version": "0.1.0",
   "description": "Mining application for OpenPoll Polling Platform",
-  "main": "index.js",
-  "preferGlobal": true,
-  "bin": {
-    "om": "bin/opollminer.js"
-  },
   "scripts": {
     "start": "node lib/runner",
     "test": "echo \"Error: no test specified\" && exit 1",
