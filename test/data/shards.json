@@ -1,0 +1,26 @@
+{
+    "5F5FB96153BB67BCDFC0A95F8B98CF4E155AFD5D89A47E643E2509DC87ABCABF": {
+        "pollHash": "5F5FB96153BB67BCDFC0A95F8B98CF4E155AFD5D89A47E643E2509DC87ABCABF",
+        "genesisBlockHash": "AEEBAD4A796FCC2E15DC4C6061B45ED9B373F26ADFC798CA7D2D8CC58182718E",
+        "peers": [
+            {
+                "publicKey": "03c3f8a5aefe6372227051a6964ef45ca433f58d660498a0165a1c619a9df7fb94",
+                "address": "mfrpV67fPjaLy3iBHGyWvKWcVbyeqBURTt",
+                "lastInteraction": 1521350875,
+                "ipAddress": "223.97.208.69",
+                "port": 9011
+            },
+            {
+                "publicKey": "036372da5c963bbf6fb670c88e02c795f6b90f5305a0aea5d9d38bd8827d2c79f6",
+                "address": "mvBir1LkNEvYCEoxpjWiGxWnsKZWHY94EJ",
+                "lastInteraction": 1521404875,
+                "ipAddress": "197.182.128.88",
+                "port": 9011
+            }
+        ],
+        "localChainLength": 5,
+        "localRespPoolSize": 20,
+        "localLastUpdateTimestamp": 1521347275,
+        "localOpMining": true
+    }
+}

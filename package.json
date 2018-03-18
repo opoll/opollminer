@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node lib/runner",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "wipe": "node tools/db_cleaner.js",
     "load": "node tools/db_loader.js",
     "fetch": "node tools/db_fetcher.js",
-    "wipe": "node tools/db_cleaner.js"
+    "wlf": "node tools/db_cleaner.js && node tools/db_loader.js && node tools/db_fetcher.js"
   },
   "author": "",
   "license": "ISC",
