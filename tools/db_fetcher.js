@@ -2,11 +2,6 @@ const level = require('level');
 
 const databases = require('../lib/util/databases');
 
-const walletIds = [
-  "5780547968e7984936ef052b1629087ba0deebd36559dd94505cb0f0d04f3658",
-  "13fb9f0d937312a6787e70161f1ee1e5f8e0d3c48cc8b030a5063849310d390e"
-]
-
 const pollIds = [ // aka poll hash...poll hash used to map in db
   "5F5FB96153BB67BCDFC0A95F8B98CF4E155AFD5D89A47E643E2509DC87ABCABF"
 ]
@@ -22,14 +17,13 @@ const randomPollId = pollIds[ Math.floor( Math.random() * pollIds.length ) ];
 
 // Fetches a random wallet from the Wallets db
 function getWalletsData(){
-  const randomWalletId = walletIds[ Math.floor( Math.random() * walletIds.length ) ];
-  databases.Wallets.get(randomWalletId, function(err, walletJson){
+  databases.Wallets.get("wallets", function(err, walletJson){
     if (err) return console.log('Error loading WalltsDb!', err)
-    const wallet = JSON.parse(walletJson);
+    const walletArray = JSON.parse(walletJson);
 
     console.log("\n");
-    console.log("Wallets Db (Random Id Fetched)\n");
-    console.dir(wallet);
+    console.log("Wallets Db \n");
+    console.dir(walletArray);
     console.log("\n");
   });
 }
@@ -41,7 +35,7 @@ function getPollsData(){
     const pollData = JSON.parse(pollDataJson);
 
     console.log("\n");
-    console.log("Polls Db (Random Id Fetched)\n");
+    console.log(`Polls Db (Poll Id ${randomPollId} Fetched)\n`);
     console.dir(pollData);
     console.log("\n");
   });
@@ -54,7 +48,7 @@ function getShardsData(){
     const shardData = JSON.parse(shardDataJson);
 
     console.log("\n");
-    console.log("Shards Db (Random Id Fetched)\n");
+    console.log(`Shards Db (Poll Id ${randomPollId} Fetched)\n`);
     console.dir(shardData);
     console.log("\n");
   });
@@ -70,7 +64,7 @@ function getShardBlocksData(){
     const block = JSON.parse(blockJson);
 
     console.log("\n");
-    console.log("ShardBlocks Db (Random Block Fetched)\n");
+    console.log(`ShardBlocks Db (Random Block From Poll Id ${randomPollId})\n`);
     console.dir(block);
     console.log("\n");
   });
@@ -82,7 +76,7 @@ function getResponsePoolData(){
     const pool = JSON.parse(poolJson);
 
     console.log("\n");
-    console.log("ResponsePool Db (Random Id Fetched)\n");
+    console.log(`ResponsePool Db (Poll Id ${randomPollId})\n`);
     console.dir(pool);
     console.log("\n");
   });

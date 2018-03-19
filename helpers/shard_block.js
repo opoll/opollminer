@@ -46,7 +46,7 @@ lib.orderedHashFields = function( shardBlockObj, ignoreNonce = false ) {
   arr.push( helper_poll_response.hashResponses( shardBlockObj.responses ) );
 
   // If we aren't ignoring the nonce, add it
-  if( ignoreNonce !== true ) {
+  if(!ignoreNonce) {
     arr.push( shardBlockObj.nonce.toString() );
   }
 

@@ -15,19 +15,13 @@ const testJson = {
 // Load 'Wallets' database with dummy data
 function loadWalletsDb(){
   // Load wallets json as js object
-  const wallets = JSON.parse(fs.readFileSync(testJson.Wallets, 'utf8'));
+  const walletsObject = JSON.parse(fs.readFileSync(testJson.Wallets, 'utf8'));
 
-  // Make function to run for each wallet indexed in wallets
-  const storeWallet = function(value, key){
-    // Load wallet
-    databases.Wallets.put(key, JSON.stringify(value), function(err){
-      if (err) return console.log(`Error loading wallet with id ${key}`, err);
-      console.log(`Loaded wallet with id ${key}`)
-    });
-  }
-
-  // Call function on each wallet in wallets
-  R.forEachObjIndexed(storeWallet, wallets);
+  // Store wallets array
+  databases.Wallets.put("wallets", JSON.stringify(walletsObject.wallets), function(err){
+    if (err) return console.log(`Error loading wallets`, err);
+    console.log(`Loaded wallets`)
+  });
 }
 
 // Load 'Polls' database with dummy data
