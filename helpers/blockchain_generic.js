@@ -28,7 +28,7 @@ lib.stringifyData = function(data){
 */
 lib.hash = function(data, algo = 'sha256') {
   // Stringify data
-  const dataStringified = stringifyData(data);
+  const dataStringified = lib.stringifyData(data);
 
   // Hash data using selected algorithm
   let finalHash;
