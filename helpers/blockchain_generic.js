@@ -50,9 +50,14 @@ lib.hash = function(data, algo = 'sha256') {
 /*
   Given a public key, this function converts the public key into an
   address
-  Note: OpenPoll Standard Spec is that addresses are Base64, not Hex
+  Note: OpenPoll Standard Spec is that addresses are Base58check, not Hex
 */
 lib.publicKeyToAddress = function(publicKey, versionByte = '00') {
+  // Convert buffer to string if publicKey is passed in as buffer
+  if(publicKey instanceof Buffer){
+    publicKey = publicKey.toString('utf8');
+  }
+  
   // 1.) Perform SHA-256 hashing on the public key
   const pubKeyHash1 = lib.hash(publicKey, 'sha256');
 
@@ -72,7 +77,10 @@ lib.publicKeyToAddress = function(publicKey, versionByte = '00') {
   const binaryAddress = versionedPubKeyHash2 + checksum;
 
   // 7.) Convert the result from a byte string into a base58 string
-  const address = bs58check.encode(Buffer.from(binaryAddress, 'hex'));
+  const preAddress = bs58check.encode(Buffer.from(binaryAddress, 'hex'));
+
+  // 8.) Prepend OPEN and append POLL
+  const address = "OPEN" + preAddress + "POLL";
 
   return address;
 }
