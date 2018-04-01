@@ -28,3 +28,9 @@ db/blockbyhash/LOCK
 db/blockbyhash/000003.log
 db/blockbyhash/CURRENT
 db/blockbyid/000003.log
+db/blockbyid/MANIFEST-000097
+db/blockbyid/000159.ldb
+*.ldb
+*.log
+*.old
+db/blockbyhash/MANIFEST-000025
