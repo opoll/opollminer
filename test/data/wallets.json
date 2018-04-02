@@ -1,0 +1,28 @@
+{
+    "wallets": [
+        {
+            "id": "13fb9f0d937312a6787e70161f1ee1e5f8e0d3c48cc8b030a5063849310d390e",
+            "passwordHash": "2e2e5e05fe57ac2cf472ecd045ef687e562a980fd50339b389c870e1962bbc45",
+            "secret": "A8F7568A9ED35635FCDA65E919D5C2E0D4DB369BB2A16834D2B410F58443D14A",
+            "address": "mnQbYxP5nCSPQdQLHRv6Fn4iyMweANufez",
+            "publicKey": "03ea11f961e7f7740382ff9ad0b978bda529406b9b134f986ff637bb1173a831af",
+            "privateKey": "86a6a61ea45deca71ec1b26822797d86a0f03b44841bb28fa25e5e7dfe36ccb2"
+        },
+        {
+            "id": "5780547968e7984936ef052b1629087ba0deebd36559dd94505cb0f0d04f3658",
+            "passwordHash": "b9fecfdd9a011bd967f11c1bc6deb95dbbf7e443a60391525870ee96fe8a63bd",
+            "secret": "CB47DD16433601CA1B0B52D54E18B79C7804BE38023E0A06AABA4FF916C5CED2",
+            "address": "n4P8Vkbj3p11RBR83XRSEAj3ZhZhEgdyrU",
+            "publicKey": "037a1e78808eab501c3f8b8ecb92ac9774592d290c04b7f170f549347f50867bd6",
+            "privateKey": "906a374e0db0e426fad651be239ca4336db69544a54f6af433f37eaba6f41688"
+        },
+        {
+            "id": "2413fb3709b05939f04cf2e92f7d0897fc2596f9ad0b8a9ea855c7bfebaae892",
+            "passwordHash": "13c1f37001c89b4785d4c67cb4ad89a9f60ec3d16e2a61cd52d74d85e9e06874",
+            "secret": "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            "address": "mzk83ymmNSmTJkBMDg1FbHbXNobHAVAFHs",
+            "publicKey": "037c4928456086d7f5be8f3cfcfe88d8d432b362c93cf5ab60f076fc901a394cd5",
+            "privateKey": "11108453c5698b1452e619d51aa2e4f5f4609b0215f12dd4e66fabedb82a2a9f"
+        }
+    ]
+}
