@@ -21,12 +21,6 @@
       "minimum": 1514764800
     },
 
-    "nextHash": {
-      "type": "string",
-      "description": "hash of the block which proceedes this block",
-      "pattern": "^[0-9A-Fa-f]{64}$"
-    },
-
     "prevHash": {
       "type": "string",
       "description": "hash of the block which preceded this block",

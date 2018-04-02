@@ -1,0 +1,44 @@
+{
+    "5F5FB96153BB67BCDFC0A95F8B98CF4E155AFD5D89A47E643E2509DC87ABCABF": [
+            {
+                "responseHash": "hash",
+                "pollHash": "pollHash",
+                "timestamp": 0,
+                "respondentAddr": "respondentAddr",
+                "rewardAddr": "rewardAddr",
+                "signature": "signature",
+                "responseData": [],
+                "respondentDemographics": []
+            },
+            {
+                "responseHash": "hash",
+                "pollHash": "pollHash",
+                "timestamp": 0,
+                "respondentAddr": "respondentAddr",
+                "rewardAddr": "rewardAddr",
+                "signature": "signature",
+                "responseData": [],
+                "respondentDemographics": []
+            },
+            {
+                "responseHash": "hash",
+                "pollHash": "pollHash",
+                "timestamp": 0,
+                "respondentAddr": "respondentAddr",
+                "rewardAddr": "rewardAddr",
+                "signature": "signature",
+                "responseData": [],
+                "respondentDemographics": []
+            },
+            {
+                "responseHash": "hash",
+                "pollHash": "pollHash",
+                "timestamp": 0,
+                "respondentAddr": "respondentAddr",
+                "rewardAddr": "rewardAddr",
+                "signature": "signature",
+                "responseData": [],
+                "respondentDemographics": []
+            }
+    ]
+}
