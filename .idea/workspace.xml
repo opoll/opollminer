@@ -2,41 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06be7e77-0016-4a28-aed1-04f1c1270531" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/000009.ldb" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/000009.ldb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/000224.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/MANIFEST-000223" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/admin/eventFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/admin/eventFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/admin/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/admin/websocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/runner.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/runner.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/blockbyhash/MANIFEST-000078" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/blockbyid/MANIFEST-000372" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/polls/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/shard_blocks/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/shard_miner/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/shard_pool/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/shards/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/wallets/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shard/BlockManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/shard/ledger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/network_module.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/network_module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proof_of_work.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proof_of_work.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shard/active_shards.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shard/active_shards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shard/logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shard/logic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shard/p2p.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shard/p2p.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/shard/worked_shards.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/shard/worked_shards.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,29 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="eventFactory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/admin/eventFactory.js">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="consumer.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/consumer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="runner.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/runner.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="91" column="10" selection-start-line="91" selection-start-column="10" selection-end-line="91" selection-end-column="10" />
+            <state relative-caret-position="525">
+              <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -89,12 +54,12 @@
         <option value="$PROJECT_DIR$/lib/admin/controller.js" />
         <option value="$PROJECT_DIR$/lib/test.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/lib/network_module.js" />
         <option value="$PROJECT_DIR$/lib/admin/websocket.js" />
         <option value="$PROJECT_DIR$/lib/runner.js" />
         <option value="$PROJECT_DIR$/lib/admin/eventFactory.js" />
         <option value="$PROJECT_DIR$/lib/consumer.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -136,12 +101,6 @@
               <item name="opollminer" type="b2602c69:ProjectViewProjectNode" />
               <item name="opollminer" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opollminer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="opollminer" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,17 +160,18 @@
       <option name="presentableId" value="Default" />
       <updated>1522690297341</updated>
       <workItem from="1522690302041" duration="14613000" />
-      <workItem from="1522762029276" duration="14163000" />
+      <workItem from="1522762029276" duration="14524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28776000" />
+    <option name="totallyTimeSpent" value="29137000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="959" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -219,7 +179,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.40338984" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.30508474" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40338984" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -306,20 +266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/admin/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/network_module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -355,6 +301,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/consumer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/admin/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="159" column="11" lean-forward="true" selection-start-line="159" selection-start-column="11" selection-end-line="159" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/admin/eventFactory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
@@ -362,10 +322,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/consumer.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        <state relative-caret-position="525">
+          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
         </state>
       </provider>
     </entry>
