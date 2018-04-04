@@ -2,37 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06be7e77-0016-4a28-aed1-04f1c1270531" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/db/polls/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/polls/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/polls/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_blocks/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_blocks/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_miner/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_miner/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shard_pool/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shard_pool/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/shards/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shards/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/000204.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/CURRENT" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/db/wallets/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/wallets/MANIFEST-000203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/admin/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/admin/websocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/admin/eventFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/admin/eventFactory.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,20 +18,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="websocket.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="websocket.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/admin/websocket.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+            <state>
+              <caret lean-forward="true" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eventFactory.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="eventFactory.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/admin/eventFactory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+            <state relative-caret-position="196">
+              <caret line="31" column="6" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -77,10 +49,11 @@
         <option value="$PROJECT_DIR$/lib/test.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/lib/consumer.js" />
-        <option value="$PROJECT_DIR$/lib/runner.js" />
         <option value="$PROJECT_DIR$/lib/network_module.js" />
-        <option value="$PROJECT_DIR$/lib/admin/eventFactory.js" />
+        <option value="$PROJECT_DIR$/lib/runner.js" />
         <option value="$PROJECT_DIR$/lib/admin/websocket.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/lib/admin/eventFactory.js" />
       </list>
     </option>
   </component>
@@ -187,12 +160,12 @@
       <option name="presentableId" value="Default" />
       <updated>1522690297341</updated>
       <workItem from="1522690302041" duration="14613000" />
-      <workItem from="1522762029276" duration="6157000" />
+      <workItem from="1522762029276" duration="8859000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20770000" />
+    <option name="totallyTimeSpent" value="23472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="959" extended-state="6" />
@@ -206,7 +179,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.43954802" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.30734465" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40338984" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -307,13 +280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/runner.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1305">
-          <caret line="87" column="1" selection-start-line="87" selection-start-column="1" selection-end-line="87" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/network_module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -328,17 +294,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/admin/eventFactory.js">
+    <entry file="file://$PROJECT_DIR$/lib/runner.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/admin/websocket.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/admin/eventFactory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="31" column="6" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
         </state>
       </provider>
     </entry>
