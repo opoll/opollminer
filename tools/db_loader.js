@@ -9,7 +9,8 @@ const testJson = {
   Polls: 'test/data/polls.json',
   Shards: 'test/data/shards.json',
   ShardBlocks: 'test/data/shardBlocks.json',
-  ResponsePool: 'test/data/responsePool.json'
+  ResponsePool: 'test/data/responsePool.json',
+  Notifications: 'test/data/notifications.json'
 };
 
 // Load 'Wallets' database with dummy data
@@ -94,6 +95,18 @@ function loadResponsePoolDb(){
   R.forEachObjIndexed(storePoolData, poolData);
 }
 
+// Load 'Notifications' db
+function loadNotifications(){
+    // Load pool data json as js object
+    const notifications = JSON.parse(fs.readFileSync(testJson.Notifications, 'utf8'));
+
+    // Insert the array into leveldb with key 'notifications'
+    databases.Notifications.put("notifications", JSON.stringify(notifications), function(err){
+        if (err) return console.log(`Error loading notifications into db`, err);
+        console.log(`Loaded notifications`)
+    });
+}
+
 
 // Call load functions
 loadWalletsDb();
@@ -101,3 +114,4 @@ loadPollsDb();
 loadShardsDb();
 loadShardBlocksDb();
 loadResponsePoolDb();
+loadNotifications();
