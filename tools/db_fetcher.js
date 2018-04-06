@@ -1,5 +1,3 @@
-const level = require('level');
-
 const databases = require('../lib/util/databases');
 
 const pollIds = [ // aka poll hash...poll hash used to map in db
@@ -82,6 +80,18 @@ function getResponsePoolData(){
   });
 }
 
+function getNotificationsData(){
+  databases.Notifications.get('notifications', function(err, notifsJson){
+      if (err) return console.log('Error loading NotificationsDb!', err)
+      const notifications = JSON.parse(notifsJson);
+
+      console.log("\n");
+      console.log(`Notifications Db \n`);
+      console.dir(notifications);
+      console.log("\n");
+  });
+}
+
 
 // Call fetch functions
 getWalletsData();
@@ -89,3 +99,4 @@ getPollsData();
 getShardsData();
 getShardBlocksData();
 getResponsePoolData();
+getNotificationsData()
