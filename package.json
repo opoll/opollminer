@@ -41,7 +41,7 @@
     "path": "^0.12.7",
     "ramda": "^0.25.0",
     "ripemd160": "^2.0.1",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.1.0",
     "superagent": "^3.8.2"
   },
   "devDependencies": {
