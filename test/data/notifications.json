@@ -1,0 +1,37 @@
+[
+  {
+    "id": "fa7fde4b8a799e8b",
+    "type": "shard",
+    "title": "Notification 1",
+    "message": "This is the 1st notification that is used for testing. Date: April 5, 2018 12:17 PM",
+    "dateCreated": 1522945046
+  },
+  {
+    "id": "bbbe0d20281f2266",
+    "type": "general",
+    "title": "Notification 2",
+    "message": "This is the 2nd notification that is used for testing. Date: April 5, 2018 12:10 PM",
+    "dateCreated": 1522944626
+  },
+  {
+    "id": "2d67851b16c2a067",
+    "type": "mainchain",
+    "title": "Notification 3",
+    "message": "This is the 3rd notification that is used for testing. Date: April 5, 2018 9:10 AM",
+    "dateCreated": 1522933826
+  },
+  {
+    "id": "9e740287515acf53",
+    "type": "shard",
+    "title": "Notification 4",
+    "message": "This is the 4th notification that is used for testing. Date: April 4, 2018 12:10:26 PM",
+    "dateCreated": 1522858226
+  },
+  {
+    "id": "ab2b62a79175b52a",
+    "type": "general",
+    "title": "Notification 5",
+    "message": "This is the 5th notification that is used for testing. Date: April 2, 2018 9:10:26 AM",
+    "dateCreated": 1522674626
+  }
+]
