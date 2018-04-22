@@ -34,3 +34,6 @@ db/blockbyid/000159.ldb
 *.log
 *.old
 db/blockbyhash/MANIFEST-000025
+*.old
+*.old
+db/wallets/MANIFEST-000026
