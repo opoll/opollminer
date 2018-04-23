@@ -1,8 +1,0 @@
-{
-  "id": "/token/transaction",
-  "type": "object",
-  
-  "properties": {},
-  
-  "required": []
-}
