@@ -1,4 +1,4 @@
-# Mining Application
+# Mining Application 
 
 **Purpose:** This document holds the very basic necessities that the mining application will need. The mining application supports two different types of mining: (1) mining the OpenPoll main blockchain, and (2) mining multiple different shard blockchains. All miners at the time of initial launch are required to operate full nodes, until a light miner is released. Before understanding the architecture and design of the mining application, you should understand the theory behind the OpenPoll main and shard blockchains. This document describes the software implementation of the mining application, however, it does not describe the higher level theory behind the main blockchain, or individual shard chains.
 
