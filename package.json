@@ -17,7 +17,7 @@
     "url": "https://github.com/opoll/opollminer.git"
   },
   "dependencies": {
-    "@openpoll/helpers": "^1.0.1",
+    "@openpoll/helpers": "^1.0.8",
     "@openpoll/schemas": "^1.0.15",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
