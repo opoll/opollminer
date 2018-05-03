@@ -1,4 +1,6 @@
 node_modules
+package-lock.json
+.DS_Store
 .env
 .config
 lib/shard/db/blockbyhash/000003.log
